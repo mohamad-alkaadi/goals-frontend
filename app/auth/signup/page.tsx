@@ -1,9 +1,10 @@
-import SigninForm from "@/components/auth/signin/SigninForm"
+import SignupForm from "@/components/auth/signup/SignupForm"
 import Link from "next/link"
 import React from "react"
 import { TbMail } from "react-icons/tb"
 import { TbLock } from "react-icons/tb"
 import { TbLockPassword } from "react-icons/tb"
+import { TbUser } from "react-icons/tb"
 
 const page = () => {
   return (
@@ -12,14 +13,14 @@ const page = () => {
         <h1 className="text-[50px] font-[500] mb-2 great-vibes-regular">
           Goals
         </h1>
-        <p className="text-[20px] font-[400] mb-2">Welcome Back</p>
+        <p className="text-[20px] font-[400] mb-2">Welcome to goals</p>
         <p className="text-[15px] font-[300] text-[#808080] mb-4">
-          Don't have an account yet?{" "}
-          <Link href={"/auth/signup"} className="text-white underline">
-            sign up
+          already have an account?{" "}
+          <Link href={"/auth/signin"} className="text-white underline">
+            sign in
           </Link>
         </p>
-        <SigninForm />
+        <SignupForm />
       </div>
     </div>
   )
