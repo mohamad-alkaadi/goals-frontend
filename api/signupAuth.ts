@@ -127,7 +127,7 @@ const signupFunction = async (
     flagError("somethingWentWrong", setErrors)
     return
   }
-  const decodedToken = decodeJWT(data.token)
+  const decodedToken = await decodeJWT(data.token)
   if (!decodedToken.exp || !decodedToken.iat) {
     return
   }

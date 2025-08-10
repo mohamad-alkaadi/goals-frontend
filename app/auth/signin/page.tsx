@@ -1,10 +1,5 @@
 import SigninForm from "@/components/auth/signin/SigninForm"
 import Link from "next/link"
-import React from "react"
-import { TbMail } from "react-icons/tb"
-import { TbLock } from "react-icons/tb"
-import { TbLockPassword } from "react-icons/tb"
-
 const page = () => {
   return (
     <div className="w-full h-screen bg-[#0b0b0b] flex justify-center items-center">

@@ -57,7 +57,6 @@ const signinFunction = async (
     flagError("missingPassword", setErrors)
     return
   }
-
   const url =
     process.env.NEXT_PUBLIC_ENV === "DEV"
       ? process.env.NEXT_PUBLIC_DEV_URL
@@ -82,17 +81,18 @@ const signinFunction = async (
     flagError("incorrectEmailOrPassword", setErrors)
     return
   }
+
   if (!data.token && data.status !== "success") {
     flagError("somethingWentWrong", setErrors)
     return
   }
-  const decodedToken = decodeJWT(data.token)
+  const decodedToken = await decodeJWT(data.token)
   if (!decodedToken.exp || !decodedToken.iat) {
     return
   }
+
   const tokenExp = decodedToken.exp - decodedToken.iat
   setCookie("token", data.token, { maxAge: tokenExp })
   return true
 }
-// incorrect password or email
 export { signinFunction }
