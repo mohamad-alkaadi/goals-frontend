@@ -1,59 +1,66 @@
 "use client"
 import { signupFunction } from "@/api/auth"
-import React from "react"
+import { useState } from "react"
 import { TbUser, TbMail, TbLock, TbLockPassword } from "react-icons/tb"
+import AuthInput from "../AuthInput"
+import { useRouter } from "next/navigation"
 
 const SignupForm = () => {
+  const [errors, setErrors] = useState({
+    missingName: false,
+    missingEmail: false,
+    missingPassword: false,
+    missingPasswordConfirm: false,
+    passwordAndConfirmNotMatch: false,
+    goodPassword: false,
+    accountExists: false,
+    somethingWentWrong: false,
+    incorrectToken: false,
+  })
+  const router = useRouter()
+
   return (
     <form
-      onSubmit={(e) => signupFunction(e)}
+      onSubmit={(e) => {
+        signupFunction(e, errors, setErrors).then((result) => {
+          if (result) {
+            router.push("/")
+          }
+        })
+      }}
       autoComplete="false"
       className="flex flex-col justify-center items-center space-y-1"
     >
-      <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
-        <TbUser className="text-[#808080] text-[26px] mx-1 mt-[1.5px]" />
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Enter your name"
-          className="text-[14px] w-full text-white outline-none mr-1"
-        />
-      </div>
-      <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
-        <TbMail className="text-[#808080] text-[26px] mx-1 mt-[1.5px]" />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Enter your email"
-          className="text-[14px] w-full text-white outline-none mr-1"
-        />
-      </div>
+      <AuthInput
+        Icon={TbUser}
+        inputType={"text"}
+        inputNameId={"name"}
+        inputPlaceholder={"Enter your name"}
+      />
 
-      <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
-        <TbLock className="text-[#808080] text-[26px] mx-1 mt-[1.5px]" />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Enter your password"
-          className="text-[14px] w-full text-white outline-none mr-1"
-        />
-      </div>
-      <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
-        <TbLockPassword className="text-[#808080] text-[26px] mx-1 mt-[1.5px]" />
-        <input
-          type="password"
-          name="passwordConfirm"
-          id="passwordConfirm"
-          placeholder="Confirm your password"
-          className="text-[14px] w-full text-white outline-none mr-1"
-        />
-      </div>
+      <AuthInput
+        Icon={TbMail}
+        inputType={"email"}
+        inputNameId={"email"}
+        inputPlaceholder={"Enter your email"}
+      />
+
+      <AuthInput
+        Icon={TbLock}
+        inputType={"password"}
+        inputNameId={"password"}
+        inputPlaceholder={"Enter your password"}
+      />
+
+      <AuthInput
+        Icon={TbLockPassword}
+        inputType={"password"}
+        inputNameId={"passwordConfirm"}
+        inputPlaceholder={"Confirm your password"}
+      />
       <button
         type="submit"
-        className="w-[360px] text-[15px] bg-[#035fb6] hover:bg-[#0076da] h-[50px] rounded-md"
+        className="cursor-pointer w-[360px] text-[15px] bg-[#035fb6] hover:bg-[#0076da] h-[50px] rounded-md"
       >
         Sign Up
       </button>

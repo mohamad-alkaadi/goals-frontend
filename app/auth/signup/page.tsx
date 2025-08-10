@@ -1,10 +1,5 @@
 import SignupForm from "@/components/auth/signup/SignupForm"
 import Link from "next/link"
-import React from "react"
-import { TbMail } from "react-icons/tb"
-import { TbLock } from "react-icons/tb"
-import { TbLockPassword } from "react-icons/tb"
-import { TbUser } from "react-icons/tb"
 
 const page = () => {
   return (

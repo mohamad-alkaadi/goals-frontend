@@ -1,15 +1,15 @@
 import React from "react"
 import { IconType } from "react-icons"
-const authInput = ({
+const AuthInput = ({
   Icon,
   inputType,
   inputNameId,
-  placeHolder,
+  inputPlaceholder,
 }: {
   Icon: IconType
   inputType: string
   inputNameId: string
-  placeHolder: string
+  inputPlaceholder: string
 }) => {
   return (
     <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
@@ -18,11 +18,11 @@ const authInput = ({
         type={inputType}
         name={inputNameId}
         id={inputNameId}
-        placeholder={placeHolder}
+        placeholder={inputPlaceholder}
         className="text-[14px] w-full text-white outline-none mr-1"
       />
     </div>
   )
 }
 
-export default authInput
+export default AuthInput
