@@ -4,25 +4,55 @@ import { useState } from "react"
 import { TbUser, TbMail, TbLock, TbLockPassword } from "react-icons/tb"
 import AuthInput from "../AuthInput"
 import { useRouter } from "next/navigation"
+import { MdErrorOutline } from "react-icons/md"
 
 const SignupForm = () => {
   const [errors, setErrors] = useState({
-    missingName: false,
-    missingEmail: false,
-    missingPassword: false,
-    missingPasswordConfirm: false,
-    passwordAndConfirmNotMatch: false,
-    goodPassword: false,
-    accountExists: false,
-    somethingWentWrong: false,
-    incorrectToken: false,
+    missingName: { state: false, message: ["please enter a name"] },
+    missingEmail: { state: false, message: ["please enter an email"] },
+    missingPassword: { state: false, message: ["please enter a password"] },
+    missingPasswordConfirm: {
+      state: false,
+      message: ["please confirm your password"],
+    },
+    passwordAndConfirmNotMatch: {
+      state: false,
+      message: ["passwords do not match"],
+    },
+    goodPassword: { state: false, message: [] as string[] },
+    accountExists: { state: false, message: ["account already exists"] },
+    somethingWentWrong: { state: false, message: ["something already exists"] },
+    incorrectToken: {
+      state: false,
+      message: ["something already exists, try logging in"],
+    },
   })
+  const initialErrors = {
+    missingName: { state: false, message: ["please enter a name"] },
+    missingEmail: { state: false, message: ["please enter an email"] },
+    missingPassword: { state: false, message: ["please enter a password"] },
+    missingPasswordConfirm: {
+      state: false,
+      message: ["please confirm your password"],
+    },
+    passwordAndConfirmNotMatch: {
+      state: false,
+      message: ["passwords do not match"],
+    },
+    goodPassword: { state: false, message: [] as string[] },
+    accountExists: { state: false, message: ["account already exists"] },
+    somethingWentWrong: { state: false, message: ["something already exists"] },
+    incorrectToken: {
+      state: false,
+      message: ["something already exists, try logging in"],
+    },
+  }
   const router = useRouter()
 
   return (
     <form
       onSubmit={(e) => {
-        signupFunction(e, errors, setErrors).then((result) => {
+        signupFunction(e, errors, setErrors, initialErrors).then((result) => {
           if (result) {
             router.push("/")
           }
@@ -64,6 +94,23 @@ const SignupForm = () => {
       >
         Sign Up
       </button>
+      <>
+        {Object.values(errors).flatMap((item, index) =>
+          item.state
+            ? item.message.map((msg, msgIndex) => {
+                return (
+                  <div
+                    key={`${index}-${msgIndex}`}
+                    className="self-start  ml-1 text-red-500 flex items-center justify-center space-x-0.5"
+                  >
+                    <MdErrorOutline className="text-[9px] mt-[2.5px]" />
+                    <p className="text-[14px]">{msg}</p>
+                  </div>
+                )
+              })
+            : []
+        )}
+      </>
     </form>
   )
 }

@@ -1,49 +1,112 @@
 import { decodeJWT } from "@/utils/tokenUtils"
 import { FormEvent, Dispatch, SetStateAction } from "react"
 import { getCookie, setCookie } from "cookies-next"
-import { passwordValidator } from "@/utils/passwordVaildator"
+import { passwordValidator } from "@/utils/passwordValidator"
 
 interface Errors {
-  missingName: boolean
-  missingEmail: boolean
-  missingPassword: boolean
-  missingPasswordConfirm: boolean
-  passwordAndConfirmNotMatch: boolean
-  goodPassword: boolean
-  accountExists: boolean
-  somethingWentWrong: boolean
-  incorrectToken: boolean
+  missingName: {
+    state: boolean
+    message: string[]
+  }
+  missingEmail: {
+    state: boolean
+    message: string[]
+  }
+  missingPassword: {
+    state: boolean
+    message: string[]
+  }
+  missingPasswordConfirm: {
+    state: boolean
+    message: string[]
+  }
+  passwordAndConfirmNotMatch: {
+    state: boolean
+    message: string[]
+  }
+  goodPassword: {
+    state: boolean
+    message: string[]
+  }
+  accountExists: {
+    state: boolean
+    message: string[]
+  }
+  somethingWentWrong: {
+    state: boolean
+    message: string[]
+  }
+  incorrectToken: {
+    state: boolean
+    message: string[]
+  }
 }
+
 const signupFunction = async (
   e: FormEvent<HTMLFormElement>,
   errors: Errors,
-  setErrors: Dispatch<SetStateAction<Errors>>
+  setErrors: Dispatch<SetStateAction<Errors>>,
+  initialErrors: Errors
 ) => {
   e.preventDefault()
+  setErrors(() => initialErrors)
   const formData = new FormData(e.currentTarget)
   const name = formData.get("name")
   if (name == "") {
-    setErrors({ ...errors, missingName: true })
+    setErrors((prev) => ({
+      ...prev,
+      missingName: { ...errors.missingName, state: true },
+    }))
     return
   }
   const email = formData.get("email")
   if (email == "") {
-    setErrors({ ...errors, missingEmail: true })
+    setErrors((prev) => ({
+      ...prev,
+      missingEmail: { ...errors.missingEmail, state: true },
+    }))
     return
   }
   const password = formData.get("password")
   if (password == "" || typeof password !== "string") {
-    setErrors({ ...errors, missingPassword: true })
+    setErrors((prev) => ({
+      ...prev,
+      missingPassword: { ...errors.missingPassword, state: true },
+    }))
     return
   }
-  if (passwordValidator(password).length !== 0) {
-    setErrors({ ...errors, goodPassword: true })
+  const passwordErrors: string[] = []
+  passwordValidator(password).forEach((item) => {
+    if (item.state) passwordErrors.push(item.message)
+  })
+
+  if (passwordErrors.length !== 0) {
+    setErrors((prev) => ({
+      ...prev,
+      goodPassword: { state: true, message: [...passwordErrors] },
+    }))
     return
   }
 
   const passwordConfirm = formData.get("passwordConfirm")
+  if (passwordConfirm == "") {
+    setErrors((prev) => ({
+      ...prev,
+      missingPasswordConfirm: {
+        ...errors.missingPasswordConfirm,
+        state: true,
+      },
+    }))
+    return
+  }
   if (password !== passwordConfirm) {
-    setErrors({ ...errors, passwordAndConfirmNotMatch: true })
+    setErrors((prev) => ({
+      ...prev,
+      passwordAndConfirmNotMatch: {
+        ...errors.passwordAndConfirmNotMatch,
+        state: true,
+      },
+    }))
     return
   }
   const url =
@@ -65,14 +128,18 @@ const signupFunction = async (
     .then((res) => res.json())
     .then((data) => data)
 
-  console.log(data)
-  console.log("done")
   if (data.error && data.error.code === 11000) {
-    setErrors({ ...errors, accountExists: true })
+    setErrors((prev) => ({
+      ...prev,
+      accountExists: { ...errors.accountExists, state: true },
+    }))
     return
   }
   if (!data.token && data.status !== "success") {
-    setErrors({ ...errors, somethingWentWrong: true })
+    setErrors((prev) => ({
+      ...prev,
+      somethingWentWrong: { ...errors.somethingWentWrong, state: true },
+    }))
     return
   }
   const decodedToken = decodeJWT(data.token)
