@@ -5,6 +5,7 @@ import { TbUser, TbMail, TbLock, TbLockPassword } from "react-icons/tb"
 import AuthInput from "../AuthInput"
 import { useRouter } from "next/navigation"
 import { MdErrorOutline } from "react-icons/md"
+import AuthErrorMsg from "../AuthErrorMsg"
 
 const SignupForm = () => {
   const [errors, setErrors] = useState({
@@ -98,15 +99,7 @@ const SignupForm = () => {
         {Object.values(errors).flatMap((item, index) =>
           item.state
             ? item.message.map((msg, msgIndex) => {
-                return (
-                  <div
-                    key={`${index}-${msgIndex}`}
-                    className="self-start max-w-[360px] ml-1 text-red-500 flex items-center justify-center space-x-0.5"
-                  >
-                    <MdErrorOutline className="text-[9px] mt-[2.5px]" />
-                    <p className="text-[14px]">{msg}</p>
-                  </div>
-                )
+                return <AuthErrorMsg key={`${index}-${msgIndex}`} msg={msg} />
               })
             : []
         )}

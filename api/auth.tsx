@@ -87,12 +87,7 @@ const signupFunction = async (
   const passwordErrors = validatePassword(password)
 
   if (passwordErrors.length !== 0) {
-    // setErrors((prev) => ({
-    //   ...prev,
-    //   goodPassword: { state: true, message: [...passwordErrors] },
-    // }))
     flagError("missingPasswordConfirm", setErrors, [...passwordErrors])
-
     return
   }
 

@@ -81,8 +81,7 @@ const passwordValidator = (text: string) => {
       title: "threeConsecutiveCharactersInARow",
       reg: /a^/,
       state: true,
-      message:
-        "password shouldn't have three or more consecutive characters in a row",
+      message: "password should not have three consecutive characters",
     })
   }
 
