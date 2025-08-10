@@ -2,6 +2,7 @@ import { decodeJWT } from "@/utils/tokenUtils"
 import { FormEvent, Dispatch, SetStateAction } from "react"
 import { setCookie } from "cookies-next"
 import { passwordValidator } from "@/utils/passwordValidator"
+import { signupInitialErrors } from "@/components/auth/signup/signupErrors"
 
 interface Errors {
   missingName: {
@@ -62,11 +63,10 @@ const validatePassword = (password: string): string[] => {
 const signupFunction = async (
   e: FormEvent<HTMLFormElement>,
   errors: Errors,
-  setErrors: Dispatch<SetStateAction<Errors>>,
-  initialErrors: Errors
+  setErrors: Dispatch<SetStateAction<Errors>>
 ) => {
   e.preventDefault()
-  setErrors(() => initialErrors)
+  setErrors(() => signupInitialErrors)
   const formData = new FormData(e.currentTarget)
   const name = formData.get("name")
   if (name == "") {

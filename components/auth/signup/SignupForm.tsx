@@ -1,10 +1,9 @@
 "use client"
-import { signupFunction } from "@/api/auth"
+import { signupFunction } from "@/api/signupAuth"
 import { useState } from "react"
 import { TbUser, TbMail, TbLock, TbLockPassword } from "react-icons/tb"
 import AuthInput from "../AuthInput"
 import { useRouter } from "next/navigation"
-import { MdErrorOutline } from "react-icons/md"
 import AuthErrorMsg from "../AuthErrorMsg"
 
 const SignupForm = () => {
@@ -22,42 +21,28 @@ const SignupForm = () => {
     },
     goodPassword: { state: false, message: [] as string[] },
     accountExists: { state: false, message: ["account already exists"] },
-    somethingWentWrong: { state: false, message: ["something already exists"] },
+    somethingWentWrong: {
+      state: false,
+      message: ["something went wrong, please try again"],
+    },
     incorrectToken: {
       state: false,
-      message: ["something already exists, try logging in"],
+      message: ["something went wrong, try logging in"],
     },
   })
-  const initialErrors = {
-    missingName: { state: false, message: ["please enter a name"] },
-    missingEmail: { state: false, message: ["please enter an email"] },
-    missingPassword: { state: false, message: ["please enter a password"] },
-    missingPasswordConfirm: {
-      state: false,
-      message: ["please confirm your password"],
-    },
-    passwordAndConfirmNotMatch: {
-      state: false,
-      message: ["passwords do not match"],
-    },
-    goodPassword: { state: false, message: [] as string[] },
-    accountExists: { state: false, message: ["account already exists"] },
-    somethingWentWrong: { state: false, message: ["something already exists"] },
-    incorrectToken: {
-      state: false,
-      message: ["something already exists, try logging in"],
-    },
-  }
+
   const router = useRouter()
 
   return (
     <form
       onSubmit={(e) => {
-        signupFunction(e, errors, setErrors, initialErrors).then((result) => {
-          if (result) {
-            router.push("/")
+        signupFunction(e, errors, setErrors).then(
+          (result: boolean | undefined) => {
+            if (result) {
+              router.push("/")
+            }
           }
-        })
+        )
       }}
       autoComplete="false"
       className="flex flex-col justify-center items-center space-y-1"
