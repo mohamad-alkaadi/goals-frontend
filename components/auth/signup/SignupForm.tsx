@@ -101,7 +101,7 @@ const SignupForm = () => {
                 return (
                   <div
                     key={`${index}-${msgIndex}`}
-                    className="self-start  ml-1 text-red-500 flex items-center justify-center space-x-0.5"
+                    className="self-start max-w-[360px] ml-1 text-red-500 flex items-center justify-center space-x-0.5"
                   >
                     <MdErrorOutline className="text-[9px] mt-[2.5px]" />
                     <p className="text-[14px]">{msg}</p>

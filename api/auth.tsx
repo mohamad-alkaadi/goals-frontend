@@ -1,6 +1,6 @@
 import { decodeJWT } from "@/utils/tokenUtils"
 import { FormEvent, Dispatch, SetStateAction } from "react"
-import { getCookie, setCookie } from "cookies-next"
+import { setCookie } from "cookies-next"
 import { passwordValidator } from "@/utils/passwordValidator"
 
 interface Errors {
@@ -42,6 +42,23 @@ interface Errors {
   }
 }
 
+const flagError = (
+  key: keyof Errors,
+  setErrors: Dispatch<SetStateAction<Errors>>,
+  msg?: string[]
+) => {
+  setErrors((prev) => ({
+    ...prev,
+    [key]: { ...prev[key], state: true, message: msg ?? prev[key].message },
+  }))
+}
+
+const validatePassword = (password: string): string[] => {
+  return passwordValidator(password)
+    .filter((item) => item.state)
+    .map((item) => item.message)
+}
+
 const signupFunction = async (
   e: FormEvent<HTMLFormElement>,
   errors: Errors,
@@ -53,60 +70,39 @@ const signupFunction = async (
   const formData = new FormData(e.currentTarget)
   const name = formData.get("name")
   if (name == "") {
-    setErrors((prev) => ({
-      ...prev,
-      missingName: { ...errors.missingName, state: true },
-    }))
+    flagError("missingName", setErrors)
     return
   }
   const email = formData.get("email")
   if (email == "") {
-    setErrors((prev) => ({
-      ...prev,
-      missingEmail: { ...errors.missingEmail, state: true },
-    }))
+    flagError("missingEmail", setErrors)
     return
   }
   const password = formData.get("password")
   if (password == "" || typeof password !== "string") {
-    setErrors((prev) => ({
-      ...prev,
-      missingPassword: { ...errors.missingPassword, state: true },
-    }))
+    flagError("missingPassword", setErrors)
     return
   }
-  const passwordErrors: string[] = []
-  passwordValidator(password).forEach((item) => {
-    if (item.state) passwordErrors.push(item.message)
-  })
+
+  const passwordErrors = validatePassword(password)
 
   if (passwordErrors.length !== 0) {
-    setErrors((prev) => ({
-      ...prev,
-      goodPassword: { state: true, message: [...passwordErrors] },
-    }))
+    // setErrors((prev) => ({
+    //   ...prev,
+    //   goodPassword: { state: true, message: [...passwordErrors] },
+    // }))
+    flagError("missingPasswordConfirm", setErrors, [...passwordErrors])
+
     return
   }
 
   const passwordConfirm = formData.get("passwordConfirm")
   if (passwordConfirm == "") {
-    setErrors((prev) => ({
-      ...prev,
-      missingPasswordConfirm: {
-        ...errors.missingPasswordConfirm,
-        state: true,
-      },
-    }))
+    flagError("missingPasswordConfirm", setErrors)
     return
   }
   if (password !== passwordConfirm) {
-    setErrors((prev) => ({
-      ...prev,
-      passwordAndConfirmNotMatch: {
-        ...errors.passwordAndConfirmNotMatch,
-        state: true,
-      },
-    }))
+    flagError("passwordAndConfirmNotMatch", setErrors)
     return
   }
   const url =
@@ -129,17 +125,11 @@ const signupFunction = async (
     .then((data) => data)
 
   if (data.error && data.error.code === 11000) {
-    setErrors((prev) => ({
-      ...prev,
-      accountExists: { ...errors.accountExists, state: true },
-    }))
+    flagError("accountExists", setErrors)
     return
   }
   if (!data.token && data.status !== "success") {
-    setErrors((prev) => ({
-      ...prev,
-      somethingWentWrong: { ...errors.somethingWentWrong, state: true },
-    }))
+    flagError("somethingWentWrong", setErrors)
     return
   }
   const decodedToken = decodeJWT(data.token)
