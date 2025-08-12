@@ -1,4 +1,5 @@
 import React from "react"
+import { HiOutlineDotsVertical } from "react-icons/hi"
 
 const Sidebar = () => {
   return (
@@ -59,9 +60,12 @@ const Sidebar = () => {
 
         <div className="border-b-[1px] border-[#343434]"></div>
       </div>
-      <div className="flex items-center px-4 py-2 text-white bg-[#333333] space-x-2">
-        <div className="text-[25px]">+</div>
-        <div className="mt-[5px]">Add Group</div>
+      <div className="flex items-center justify-between px-4 py-2 text-white bg-[#333333] ">
+        <div className="flex items-center space-x-2">
+          <div className="text-[25px]">+</div>
+          <div className="mt-[5px]">Add Group</div>
+        </div>
+        <HiOutlineDotsVertical className="mt-2" />
       </div>
     </div>
   )

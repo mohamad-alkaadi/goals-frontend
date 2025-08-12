@@ -55,7 +55,7 @@ const SigninForm = () => {
         type="submit"
         className="cursor-pointer w-[360px] text-[15px] bg-[#035fb6] hover:bg-[#0076da] h-[50px] rounded-md"
       >
-        Sign Up
+        Sign In
       </button>
       <>
         {Object.values(errors).flatMap((item, index) =>
