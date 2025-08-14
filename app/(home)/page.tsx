@@ -3,7 +3,7 @@ import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import Image from "next/image"
 import { IoIosAdd } from "react-icons/io"
-import Sidebar from "@/components/home/Sidebar"
+import Sidebar from "@/components/common/sidebar/Sidebar"
 import GoalsSection from "@/components/home/GoalsSection"
 
 export default async function Home() {

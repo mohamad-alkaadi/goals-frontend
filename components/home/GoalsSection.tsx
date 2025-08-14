@@ -10,6 +10,7 @@ import { FaRegLightbulb } from "react-icons/fa"
 import { BsThreeDots } from "react-icons/bs"
 import { FaPlus } from "react-icons/fa6"
 import Goal from "./Goal"
+import AddGoal from "./AddGoal"
 
 const GoalsSection = () => {
   return (
@@ -33,26 +34,26 @@ const GoalsSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-[20px] flex-grow overflow-auto mt-4 flex flex-col space-y-1">
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
-        <Goal />
+      <div className="w-full h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
+        <Goal
+          goal={"finish 5 videos"}
+          group={"tasks"}
+          overdue={true}
+          overDueDate={"Mon, Mar 24"}
+          favorite={true}
+          shared={true}
+        />
+        <Goal
+          goal={"test num 1"}
+          group={"tests"}
+          overdue={false}
+          overDueDate={"Mon, Mar 24"}
+          favorite={false}
+          shared={false}
+        />
       </div>
-      <div className="h-[47px] bg-[#2a2a2a] hover:bg-[#373737] text-[#bac8d4] mt-2 rounded-sm flex items-center">
-        <FaPlus className="mx-3 text-[18px]" />
-        <div className="text-[15px] font-[400]">Add a task</div>
-      </div>
+
+      <AddGoal />
     </div>
   )
 }
