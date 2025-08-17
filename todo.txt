@@ -1,0 +1,43 @@
+setcookie("session_id", $value, [
+  'expires' => time() + 3600,
+  'path' => '/',
+  'domain' => 'example.com',
+  'secure' => true,     // Only send over HTTPS
+  'httponly' => true,   // Prevent JavaScript access
+  'samesite' => 'Strict'
+]);
+
+prevent cookie from being accessed by JavaScript
+
+// app/actions/storeToken.ts
+'use server'
+
+import { cookies } from 'next/headers'
+
+export async function storeToken(token: string) {
+  cookies().set({
+    name: 'accessToken',
+    value: token,
+    httpOnly: true,       // 🔒 Prevents JS access
+    secure: true,         // 🔐 Only over HTTPS
+    sameSite: 'strict',   // 🛡️ CSRF protection
+    path: '/',
+  })
+}
+
+🛡️ Why You Should Restrict JavaScript Access to Cookies
+
+XSS Protection: If an attacker injects JavaScript into your page, they can read cookies via document.cookie unless those cookies are protected.
+
+Session Security: Cookies used for authentication should never be accessible to JavaScript.
+
+Compliance: Many security standards (e.g., OWASP, PCI-DSS) recommend using HttpOnly and Secure flags for cookies.
+
+
+find a way to store the last token on the server and delete it so you cant have two tokens
+
+Add a unique random string (salt) to each password before hashing.
+This makes precomputed tables useless because each hash becomes unique.
+
+Example: hash(salt + password)
+

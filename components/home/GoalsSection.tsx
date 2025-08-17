@@ -11,7 +11,16 @@ import { BsThreeDots } from "react-icons/bs"
 import { FaPlus } from "react-icons/fa6"
 import Goal from "./Goal"
 import AddGoal from "./AddGoal"
-
+import FriendsSheet from "./FriendsSheet"
+import SuggestionsSheet from "./SuggestionsSheet"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 const GoalsSection = () => {
   return (
     <div className="p-10 flex flex-col w-full">
@@ -23,15 +32,25 @@ const GoalsSection = () => {
           </div>
         </div>
         <div className="flex space-x-1 text-white">
-          <div className="bg-[#303030] hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
-            <LuEarth />
-          </div>
-          <div className="bg-[#303030] hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
-            <FaRegLightbulb />
-          </div>
-          <div className="hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
-            <BsThreeDots />
-          </div>
+          <FriendsSheet />
+          <SuggestionsSheet />
+          <DropdownMenu>
+            <DropdownMenuTrigger className="hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
+              <BsThreeDots />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              side="bottom"
+              className="bg-[#212121] text-white border-0 mt-1 rounded-sm"
+            >
+              <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+                Sort by
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-[#343434]" />
+              <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <div className="w-full h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
