@@ -31,13 +31,13 @@ const GoalsSectionHeader = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side="bottom"
-            className="bg-[#212121] text-white border-0 mt-1 rounded-sm"
+            className="bg-[#212121] text-white border-0 mt-1 rounded-sm "
           >
-            <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+            <DropdownMenuItem className="hover:bg-[#333333] cursor-pointer rounded-t-sm py-2 px-4">
               Sort by
             </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-[#343434]" />
-            <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+            <DropdownMenuSeparator className="bg-[#2a2a2a]" />
+            <DropdownMenuItem className="hover:bg-[#333333] cursor-pointer py-2 px-4  rounded-b-sm">
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
