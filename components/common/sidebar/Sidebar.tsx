@@ -14,15 +14,10 @@ const Sidebar = () => {
         <SideBarSeparator />
         <div className="h-[calc(100vh-69px-68px)] overflow-auto">
           <SidebarConstantGroupButton title={"My Day"} nOfGoals={2} />
-
           <SidebarConstantGroupButton title={"Overdue"} nOfGoals={4} />
-
           <SidebarConstantGroupButton title={"Completed"} nOfGoals={10} />
-
           <SidebarConstantGroupButton title={"Shared"} nOfGoals={3} />
-
           <SideBarSeparator />
-
           <SidebarAddedGroupButton title={"Study"} nOfGoals={3} />
         </div>
       </div>

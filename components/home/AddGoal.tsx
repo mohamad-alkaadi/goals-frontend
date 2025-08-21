@@ -1,8 +1,6 @@
 "use client"
 import { useRef, useState } from "react"
 import { FaPlus } from "react-icons/fa6"
-import { GoPeople } from "react-icons/go"
-import { MdOutlineCalendarMonth } from "react-icons/md"
 import AddGoalAddPeople from "./AddGoalAddPeople"
 import AddGoalAddDueDate from "./AddGoalAddDueDate"
 

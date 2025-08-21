@@ -41,3 +41,14 @@ This makes precomputed tables useless because each hash becomes unique.
 
 Example: hash(salt + password)
 
+in production cookies must be http only and secure
+
+make the login form correctly to be recognized by password manager software
+
+
+the token must be in httpOnly cookie
+
+when you log out you must make sure that the token is invalidated on the backend 
+
+cookie should be sent by headers not body in body javascript will have access to it 
+

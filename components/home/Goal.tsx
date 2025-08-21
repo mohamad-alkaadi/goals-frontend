@@ -2,23 +2,24 @@
 import React from "react"
 import { CiCalendar } from "react-icons/ci"
 import { FaCheck } from "react-icons/fa6"
-import { GoDotFill, GoPersonAdd } from "react-icons/go"
-import { IoMdStar, IoMdStarOutline } from "react-icons/io"
-import { GoPeople } from "react-icons/go"
+import { GoDotFill } from "react-icons/go"
+import GoalOptions from "./GoalOptions"
 
 const Goal = ({
   goal,
-  group,
+  groupName,
+  favorite,
+  dueDate,
   overdue,
   overDueDate,
-  favorite,
   shared,
 }: {
   goal: string
-  group: string
+  groupName: string
+  favorite: boolean
+  dueDate: boolean
   overdue: boolean
   overDueDate: string
-  favorite: boolean
   shared: boolean
 }) => {
   return (
@@ -39,51 +40,24 @@ const Goal = ({
         <div className="flex flex-col cursor-pointer">
           <div className="text-white text-[15px]">{goal}</div>
           <div className="text-[#cbcbcb] flex items-center space-x-2">
-            <div className="text-[13px]">{group}</div>
-            <GoDotFill className="text-[10px] mt-[2px]" />
-            <div className="flex justify-center items-center text-red-500 space-x-1">
-              <CiCalendar className="text-[12px]" />
-              <div className="text-[13px]">Mon, Mar 24</div>
-            </div>
+            <div className="text-[13px]">{groupName}</div>
+            {dueDate ? (
+              <div className="flex items-center space-x-2">
+                <GoDotFill className="text-[10px] mt-[2px]" />
+                <div
+                  className={`flex justify-center items-center ${
+                    overdue ? "text-red-500" : "text-green-500"
+                  }  space-x-1`}
+                >
+                  <CiCalendar className="text-[12px]" />
+                  <div className="text-[13px]">{overDueDate}</div>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center space-x-2">
-        {favorite ? (
-          <GoPeople
-            onClick={(event: React.MouseEvent) => {
-              event.stopPropagation()
-              alert("multiple people clicked")
-            }}
-            className="text-[20px] text-[#cbcbcb] hover:text-[#8795a0] cursor-pointer"
-          />
-        ) : (
-          <GoPersonAdd
-            onClick={(event: React.MouseEvent) => {
-              event.stopPropagation()
-              alert("one person clicked")
-            }}
-            className="text-[20px] text-[#cbcbcb] hover:text-[#8795a0] cursor-pointer"
-          />
-        )}
-        {favorite ? (
-          <IoMdStar
-            onClick={(event: React.MouseEvent) => {
-              event.stopPropagation()
-              alert("full star clicked")
-            }}
-            className="text-[20px] text-[#cbcbcb] hover:text-[#8795a0] cursor-pointer"
-          />
-        ) : (
-          <IoMdStarOutline
-            onClick={(event: React.MouseEvent) => {
-              event.stopPropagation()
-              alert("empty star clicked")
-            }}
-            className="text-[20px] text-[#cbcbcb] hover:text-[#8795a0] cursor-pointer"
-          />
-        )}
-      </div>
+      <GoalOptions favorite={favorite} />
     </div>
   )
 }
