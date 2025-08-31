@@ -1,10 +1,14 @@
 "use client";
-
 import { getTokenCookieClient } from "@/utils/tokenUtilsClient";
-
-const changeGoalFavorite = async (id: string, favorite: boolean) => {
+import { Dispatch, SetStateAction } from "react";
+// this function takes id and favorite state and favorite state setter
+// and makes a patch request to change the favorite to the opposite of the previous state
+const changeGoalFavorite = async (
+  id: string,
+  favorite: boolean,
+  setFavoriteState: Dispatch<SetStateAction<boolean>>
+) => {
   const token = await getTokenCookieClient();
-  console.log(token);
   const url =
     process.env.NEXT_PUBLIC_ENV === "DEV"
       ? process.env.NEXT_PUBLIC_DEV_URL
@@ -19,9 +23,8 @@ const changeGoalFavorite = async (id: string, favorite: boolean) => {
     body: JSON.stringify({
       favorite: !favorite,
     }),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  });
+  setFavoriteState(!favorite);
 };
 
 export { changeGoalFavorite };

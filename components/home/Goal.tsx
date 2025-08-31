@@ -14,6 +14,7 @@ const Goal = ({
   dueDate,
   shared,
   key,
+  id,
 }: {
   goal: string;
   groupName: string;
@@ -23,6 +24,7 @@ const Goal = ({
   dueDate: Date;
   shared: boolean;
   key: string;
+  id: string;
 }) => {
   return (
     <div
@@ -68,7 +70,7 @@ const Goal = ({
           </div>
         </div>
       </div>
-      <GoalOptions favorite={favorite} id={key} />
+      <GoalOptions favorite={favorite} id={id} shared={shared} />
     </div>
   );
 };
