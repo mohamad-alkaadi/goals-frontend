@@ -1,10 +1,10 @@
-import React from "react"
-import { MdOutlineCalendarMonth } from "react-icons/md"
+import React from "react";
+import { MdOutlineCalendarMonth } from "react-icons/md";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 
 const AddGoalAddDueDate = () => {
   return (
@@ -16,7 +16,7 @@ const AddGoalAddDueDate = () => {
         <p>Add due date</p>
       </TooltipContent>
     </Tooltip>
-  )
-}
+  );
+};
 
-export default AddGoalAddDueDate
+export default AddGoalAddDueDate;

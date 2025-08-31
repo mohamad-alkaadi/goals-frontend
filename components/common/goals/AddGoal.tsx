@@ -1,13 +1,13 @@
-"use client"
-import { useRef, useState } from "react"
-import { FaPlus } from "react-icons/fa6"
-import AddGoalAddPeople from "./AddGoalAddPeople"
-import AddGoalAddDueDate from "./AddGoalAddDueDate"
+"use client";
+import { useRef, useState } from "react";
+import { FaPlus } from "react-icons/fa6";
+import AddGoalAddDueDate from "./AddGoalAddDueDate";
+import AddGoalAddPeople from "./AddGoalAddPeople";
 
 const AddGoal = () => {
-  const [isFocused, setIsFocused] = useState(false)
-  const [inputValue, setInputValue] = useState("")
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <form
       className={`h-[47px] bg-[#2a2a2a] hover:bg-[#373737] ${
@@ -34,7 +34,7 @@ const AddGoal = () => {
         <AddGoalAddPeople />
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default AddGoal
+export default AddGoal;

@@ -23,6 +23,7 @@ const Goals = async () => {
           shared={item.shared}
           key={item._id}
           id={item._id}
+          completed={item.completed}
         />
       ))}
     </div>

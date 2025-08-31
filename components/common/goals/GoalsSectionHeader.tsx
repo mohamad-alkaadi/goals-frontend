@@ -1,21 +1,21 @@
+import FriendsSheet from "@/components/common/sheets/FriendsSheet";
+import SuggestionsSheet from "@/components/common/sheets/SuggestionsSheet";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@radix-ui/react-dropdown-menu"
-import React from "react"
-import { BsThreeDots } from "react-icons/bs"
-import FriendsSheet from "./FriendsSheet"
-import SuggestionsSheet from "./SuggestionsSheet"
+} from "@radix-ui/react-dropdown-menu";
+import React from "react";
+import { BsThreeDots } from "react-icons/bs";
 
 const GoalsSectionHeader = () => {
   const date = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
-  })
+  });
   return (
     <div className="w-full flex justify-between items-center">
       <div>
@@ -44,7 +44,7 @@ const GoalsSectionHeader = () => {
         </DropdownMenu>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GoalsSectionHeader
+export default GoalsSectionHeader;

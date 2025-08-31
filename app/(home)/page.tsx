@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { IoIosAdd } from "react-icons/io";
 import Sidebar from "@/components/common/sidebar/Sidebar";
-import GoalsSection from "@/components/home/GoalsSection";
+import GoalsSection from "@/components/common/goals/GoalsSection";
 
 export default async function Home() {
   const token = await checkForTokenFromCookies();
