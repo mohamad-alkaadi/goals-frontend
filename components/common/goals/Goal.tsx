@@ -31,6 +31,8 @@ const Goal = ({
   goalDisplay: boolean;
 }) => {
   const [completedGoal, setCompletedGoal] = useState<boolean>(completed);
+  console.log("zeze", completedGoal);
+
   return (
     <div
       onClick={() => alert("goal clicked")}
@@ -62,6 +64,7 @@ const Goal = ({
               dueDateActive={dueDateActive}
               overdue={overdue}
               dueDate={dueDate}
+              completedGoal={completedGoal}
             />
           </div>
         </div>

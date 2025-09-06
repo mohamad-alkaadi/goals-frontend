@@ -6,19 +6,29 @@ const GoalDate = ({
   dueDateActive,
   overdue,
   dueDate,
+  completedGoal,
 }: {
   dueDateActive: boolean;
   overdue: boolean;
   dueDate: Date;
+  completedGoal: boolean;
 }) => {
+  console.log(dueDate);
+  console.log("bobo", completedGoal);
+
   {
     return dueDateActive ? (
       <div className="flex items-center space-x-2">
         <GoDotFill className="text-[10px] mt-[2px]" />
         <div
           className={`flex justify-center items-center ${
-            overdue ? "text-red-500" : "text-green-500"
-          }  space-x-1`}
+            completedGoal
+              ? "text-[#cbcbcb]"
+              : overdue
+              ? "text-red-500"
+              : "text-green-500"
+          }
+space-x-1`}
         >
           <CiCalendar className="text-[12px]" />
           <div className="text-[13px]">
