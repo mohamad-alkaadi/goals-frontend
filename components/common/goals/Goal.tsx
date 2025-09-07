@@ -31,7 +31,6 @@ const Goal = ({
   goalDisplay: boolean;
 }) => {
   const [completedGoal, setCompletedGoal] = useState<boolean>(completed);
-  console.log("zeze", completedGoal);
 
   return (
     <div

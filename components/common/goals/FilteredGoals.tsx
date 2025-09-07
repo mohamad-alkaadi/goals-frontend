@@ -12,7 +12,6 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
     active: true,
     completed: false,
   });
-  console.log(goalsState);
 
   useEffect(() => {
     setActiveGoals(goalsState.filter((g) => !g.completed));

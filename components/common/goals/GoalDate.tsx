@@ -13,9 +13,6 @@ const GoalDate = ({
   dueDate: Date;
   completedGoal: boolean;
 }) => {
-  console.log(dueDate);
-  console.log("bobo", completedGoal);
-
   {
     return dueDateActive ? (
       <div className="flex items-center space-x-2">
