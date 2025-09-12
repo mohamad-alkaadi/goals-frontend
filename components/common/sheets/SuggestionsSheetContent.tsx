@@ -1,7 +1,7 @@
 import React from "react";
 import { IoAdd } from "react-icons/io5";
 
-const Suggestions = () => {
+const SuggestionsSheetContent = () => {
   return (
     <div className="w-full flex-grow overflow-auto">
       <div className="w-full flex justify-center items-center space-x-2 py-3 hover:bg-[#373737] px-2  border-b-[1px] border-[#393939]">
@@ -14,4 +14,4 @@ const Suggestions = () => {
   );
 };
 
-export default Suggestions;
+export default SuggestionsSheetContent;

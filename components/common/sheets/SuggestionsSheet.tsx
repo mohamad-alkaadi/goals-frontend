@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { FaRegLightbulb } from "react-icons/fa6";
-import { IoAdd } from "react-icons/io5";
 import SheetTemplate from "./SheetTemplate";
-import Suggestions from "./Suggestions";
+import SuggestionsSheetContent from "./SuggestionsSheetContent";
 const SuggestionsSheet = () => {
   return (
     <SheetTemplate
@@ -16,7 +15,7 @@ const SuggestionsSheet = () => {
       headerClassName="flex flex-col justify-center space-y-1 h-full"
       title="Suggestions"
     >
-      <Suggestions />
+      <SuggestionsSheetContent />
     </SheetTemplate>
   );
 };
