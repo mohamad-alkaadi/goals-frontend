@@ -31,20 +31,22 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
         />
       )}
       {activeGoals.map((item) => (
-        <Goal
-          goal={item.title}
-          groupName={item.groupName}
-          favorite={item.favorite}
-          dueDateActive={item.dueDateActive}
-          overdue={item.overDue}
-          dueDate={item.dueDate}
-          shared={item.shared}
-          id={item._id}
-          completed={item.completed}
-          key={item._id}
-          setGoalsState={setGoalsState}
-          goalDisplay={groupOpen.active}
-        />
+        <div key={item._id}>
+          <Goal
+            goal={item.title}
+            groupName={item.groupName}
+            favorite={item.favorite}
+            dueDateActive={item.dueDateActive}
+            overdue={item.overDue}
+            dueDate={item.dueDate}
+            shared={item.shared}
+            id={item._id}
+            completed={item.completed}
+            key={item._id}
+            setGoalsState={setGoalsState}
+            goalDisplay={groupOpen.active}
+          />
+        </div>
       ))}
       {completedGoals.length != 0 && (
         <GroupToggleButton

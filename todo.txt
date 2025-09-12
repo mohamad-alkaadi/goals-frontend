@@ -52,3 +52,4 @@ when you log out you must make sure that the token is invalidated on the backend
 
 cookie should be sent by headers not body in body javascript will have access to it 
 
+
