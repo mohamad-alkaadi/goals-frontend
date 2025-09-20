@@ -1,5 +1,4 @@
 import { checkForTokenFromCookies } from "@/utils/tokenUtils";
-import { cookies } from "next/headers";
 export interface GoalsType {
   title: string;
   description: string;
