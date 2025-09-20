@@ -5,7 +5,10 @@ export interface FriendsType {
   _id: string;
   name: string;
 }
-
+export interface SearchResult {
+  resSuccess: boolean;
+  message: string;
+}
 const getAllFriends = async () => {
   const token = await getTokenCookieClient();
   const url =
@@ -47,7 +50,7 @@ const deleteFriend = async (id: string) => {
 
 const addFriend = async (
   email: string,
-  setSearchResult: Dispatch<SetStateAction<string>>
+  setSearchResult: Dispatch<SetStateAction<SearchResult>>
 ) => {
   const token = await getTokenCookieClient();
   const url =
@@ -64,8 +67,14 @@ const addFriend = async (
     body: JSON.stringify({
       email: email,
     }),
-  }).catch((err) => console.log("err:", err));
-  console.log("result:", result);
+  })
+    .then((res) => res.json())
+    .catch((err) => err.json());
+  if (result.status == "success")
+    setSearchResult({ resSuccess: true, message: result.message });
+  if (result.status == "fail")
+    setSearchResult({ resSuccess: false, message: result.message });
+  console.log(result);
 };
 
 export { getAllFriends, deleteFriend, addFriend };
