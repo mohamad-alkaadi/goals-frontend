@@ -5,10 +5,41 @@ export interface FriendsType {
   _id: string;
   name: string;
 }
+
+export interface FriendRequestsType {
+  friendRequests: {
+    _id: string;
+    from: {
+      _id: string;
+      name: string;
+    };
+    to: {
+      _id: string;
+      name: string;
+    };
+  };
+}
+export interface RequestsType {
+  friendRequests: FriendRequestsType[] | null;
+  pendingRequests: FriendRequestsType[] | null;
+}
+export interface SentRequestsType {
+  _id: string;
+  from: {
+    _id: string;
+    name: string;
+  };
+  to: {
+    _id: string;
+    name: string;
+  };
+}
+
 export interface SearchResult {
   resSuccess: boolean;
   message: string;
 }
+
 const getAllFriends = async () => {
   const token = await getTokenCookieClient();
   const url =
@@ -50,7 +81,8 @@ const deleteFriend = async (id: string) => {
 
 const addFriend = async (
   email: string,
-  setSearchResult: Dispatch<SetStateAction<SearchResult>>
+  setSearchResult: Dispatch<SetStateAction<SearchResult>>,
+  setEmail: Dispatch<SetStateAction<string>>
 ) => {
   const token = await getTokenCookieClient();
   const url =
@@ -70,8 +102,10 @@ const addFriend = async (
   })
     .then((res) => res.json())
     .catch((err) => err.json());
-  if (result.status == "success")
+  if (result.status == "success") {
     setSearchResult({ resSuccess: true, message: result.message });
+    setEmail("");
+  }
   if (result.status == "fail")
     setSearchResult({ resSuccess: false, message: result.message });
   console.log(result);

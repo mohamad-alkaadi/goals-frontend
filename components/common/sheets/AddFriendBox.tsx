@@ -17,8 +17,7 @@ const AddFriendBox = () => {
           e.preventDefault();
           if (email === "") return;
           setSubmitActive(true);
-          addFriend(email, setSearchResult);
-          setEmail("");
+          addFriend(email, setSearchResult, setEmail);
           setSubmitActive(false);
         }}
         className="flex justify-center items-center w-full border-[1px] border-[#9b9b9b] space-x-1"
@@ -33,6 +32,7 @@ const AddFriendBox = () => {
           className="flex-grow outline-0 py-2"
           placeholder="Add Friend"
           value={email}
+          autoComplete="off"
           onChange={(e) => setEmail(e.target.value)}
         />
         <button
@@ -46,7 +46,7 @@ const AddFriendBox = () => {
         </button>
       </form>
       <div
-        className={`pl-1 ${
+        className={`pl-1 text-[15px] first-letter:uppercase ${
           searchResult.resSuccess ? "text-green-500" : "text-red-500"
         }`}
       >

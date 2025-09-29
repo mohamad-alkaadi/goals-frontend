@@ -28,6 +28,7 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
             setGroupOpen((prev) => ({ ...prev, active: !prev.active }));
           }}
           title={"Active Goals"}
+          width="w-[150px]"
         />
       )}
       {activeGoals.map((item) => (
@@ -56,6 +57,7 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
             setGroupOpen((prev) => ({ ...prev, completed: !prev.completed }));
           }}
           title={"completed"}
+          width="w-[150px]"
         />
       )}
 
