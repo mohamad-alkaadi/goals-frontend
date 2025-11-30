@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "./auth/auth-input-fix.css";
+
 @custom-variant dark (&:is(.dark *));
 
 .great-vibes-regular {

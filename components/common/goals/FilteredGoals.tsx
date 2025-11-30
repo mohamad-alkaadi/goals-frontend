@@ -29,6 +29,7 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
           }}
           title={"Active Goals"}
           width="w-[150px]"
+          rounded={"rounded-sm"}
         />
       )}
       {activeGoals.map((item) => (
@@ -58,6 +59,7 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
           }}
           title={"completed"}
           width="w-[150px]"
+          rounded={"rounded-sm"}
         />
       )}
 

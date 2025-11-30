@@ -33,7 +33,10 @@ const AddFriendBox = () => {
           placeholder="Add Friend"
           value={email}
           autoComplete="off"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setSearchResult({ resSuccess: false, message: "" });
+          }}
         />
         <button
           type="submit"

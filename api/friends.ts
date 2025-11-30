@@ -6,6 +6,27 @@ export interface FriendsType {
   name: string;
 }
 
+export interface FriendsApiResponse {
+  friends: FriendsType[];
+  received: FriendsType[];
+  sent: FriendsType[];
+}
+// export interface FriendsType {
+//   friends:{
+//     _id: string;
+//     name: string;
+//   };
+//   received:{
+//     _id: string;
+//     name: string;
+//   };
+//   sent:{
+//     _id: string;
+//     name: string;
+//   };
+
+// }
+
 export interface FriendRequestsType {
   friendRequests: {
     _id: string;
@@ -40,24 +61,23 @@ export interface SearchResult {
   message: string;
 }
 
-const getAllFriends = async () => {
+const getAllFriends = async (): Promise<FriendsApiResponse> => {
   const token = await getTokenCookieClient();
   const url =
     process.env.NEXT_PUBLIC_ENV === "DEV"
       ? process.env.NEXT_PUBLIC_DEV_URL
       : process.env.NEXT_PUBLIC_PROD_URL;
 
-  const friends = await fetch(`${url}/api/v1/friends/`, {
+  const response = await fetch(`${url}/api/v1/friends/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
-    .then((data) => data.data as FriendsType[]);
-
-  return friends;
+  });
+  const data = await response.json();
+  // Assuming the API returns { data: { friends, received, sent } }
+  return data.data as FriendsApiResponse;
 };
 
 const deleteFriend = async (id: string) => {
@@ -67,7 +87,7 @@ const deleteFriend = async (id: string) => {
       ? process.env.NEXT_PUBLIC_DEV_URL
       : process.env.NEXT_PUBLIC_PROD_URL;
 
-  await fetch(`${url}/api/v1/friends/delete`, {
+  await fetch(`${url}/api/v1/friends/`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -75,6 +95,59 @@ const deleteFriend = async (id: string) => {
     },
     body: JSON.stringify({
       friendId: id,
+    }),
+  });
+};
+const acceptFriend = async (id: string) => {
+  const token = await getTokenCookieClient();
+  const url =
+    process.env.NEXT_PUBLIC_ENV === "DEV"
+      ? process.env.NEXT_PUBLIC_DEV_URL
+      : process.env.NEXT_PUBLIC_PROD_URL;
+  await fetch(`${url}/api/v1/friends/requests/recipient/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      from: id,
+    }),
+  });
+};
+
+const rejectFriend = async (id: string) => {
+  const token = await getTokenCookieClient();
+  const url =
+    process.env.NEXT_PUBLIC_ENV === "DEV"
+      ? process.env.NEXT_PUBLIC_DEV_URL
+      : process.env.NEXT_PUBLIC_PROD_URL;
+  await fetch(`${url}/api/v1/friends/requests/recipient/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      from: id,
+    }),
+  });
+};
+
+const cancelFriendRequest = async (id: string) => {
+  const token = await getTokenCookieClient();
+  const url =
+    process.env.NEXT_PUBLIC_ENV === "DEV"
+      ? process.env.NEXT_PUBLIC_DEV_URL
+      : process.env.NEXT_PUBLIC_PROD_URL;
+  await fetch(`${url}/api/v1/friends/requests/sender/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      from: id,
     }),
   });
 };
@@ -90,7 +163,7 @@ const addFriend = async (
       ? process.env.NEXT_PUBLIC_DEV_URL
       : process.env.NEXT_PUBLIC_PROD_URL;
 
-  const result = await fetch(`${url}/api/v1/friends/add`, {
+  const result = await fetch(`${url}/api/v1/friends/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -102,13 +175,20 @@ const addFriend = async (
   })
     .then((res) => res.json())
     .catch((err) => err.json());
+
   if (result.status == "success") {
     setSearchResult({ resSuccess: true, message: result.message });
     setEmail("");
   }
   if (result.status == "fail")
     setSearchResult({ resSuccess: false, message: result.message });
-  console.log(result);
 };
 
-export { getAllFriends, deleteFriend, addFriend };
+export {
+  getAllFriends,
+  deleteFriend,
+  addFriend,
+  acceptFriend,
+  rejectFriend,
+  cancelFriendRequest,
+};

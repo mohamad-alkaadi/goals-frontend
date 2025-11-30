@@ -19,7 +19,7 @@ const AuthInput = ({
         name={inputNameId}
         id={inputNameId}
         placeholder={inputPlaceholder}
-        className="text-[14px] w-full text-white outline-none mr-1"
+        className="text-[14px] w-full text-white outline-none mr-1 bg-transparent"
       />
     </div>
   )

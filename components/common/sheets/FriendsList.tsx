@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Friends from "./Friends";
-import { FriendsType, getAllFriends, RequestsType } from "@/api/friends";
+import { FriendsType, getAllFriends, FriendsApiResponse } from "@/api/friends";
 import GroupToggleButton from "../goals/GroupToggleButton";
 
 const FriendsList = () => {
   const [activeList, setActiveList] = useState({
-    requests: false,
     friends: false,
+    requests: false,
     sentRequests: false,
   });
   const [friends, setFriends] = useState<FriendsType[]>([]);
-  const [requests, setRequests] = useState<RequestsType[]>([]);
-  const [sent, setSent] = useState<RequestsType[]>([]);
+  const [received, setReceived] = useState<FriendsType[]>([]);
+  const [sent, setSent] = useState<FriendsType[]>([]);
   useEffect(() => {
     const getData = async () => {
-      const data = await getAllFriends();
-      setFriends(data);
+      const data: FriendsApiResponse = await getAllFriends();
+      setFriends(data.friends);
+      setReceived(data.received);
+      setSent(data.sent);
     };
     getData();
   }, []);
@@ -30,24 +32,46 @@ const FriendsList = () => {
         }}
         title={"Friends"}
         width={"w-full"}
+        rounded={""}
       />
       {activeList.friends && (
-        <Friends friends={friends} setFriends={setFriends} />
+        <Friends friends={friends} setFriends={setFriends} listType="friends" />
       )}
       <GroupToggleButton
-        length={friends.length}
-        active={activeList.friends}
+        length={received.length}
+        active={activeList.requests}
+        setGroupButtonOpen={() => {
+          setActiveList((prev) => ({
+            ...prev,
+            requests: !prev.requests,
+          }));
+        }}
+        title={"Received"}
+        width={"w-full"}
+        rounded={""}
+      />
+      {activeList.requests && (
+        <Friends
+          friends={received}
+          setFriends={setReceived}
+          listType="received"
+        />
+      )}
+      <GroupToggleButton
+        length={sent.length}
+        active={activeList.sentRequests}
         setGroupButtonOpen={() => {
           setActiveList((prev) => ({
             ...prev,
             sentRequests: !prev.sentRequests,
           }));
         }}
-        title={"Pending"}
+        title={"Sent"}
         width={"w-full"}
+        rounded={""}
       />
       {activeList.sentRequests && (
-        <Friends friends={friends} setFriends={setFriends} />
+        <Friends friends={sent} setFriends={setSent} listType="sent" />
       )}
     </div>
   );

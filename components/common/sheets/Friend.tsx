@@ -1,18 +1,24 @@
-import { deleteFriend, FriendsType } from "@/api/friends";
+import { FriendsType } from "@/api/friends";
 import { getInitials } from "@/utils/stringUtils";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose, IoMdCheckmark } from "react-icons/io";
 
 const Friend = ({
   id,
   name,
   setFriends,
+  closeButtonAction,
+  checkMarkButtonAction,
 }: {
   id: string;
   name: string;
   setFriends: Dispatch<SetStateAction<FriendsType[]>>;
+  closeButtonAction: (id: string) => void;
+  checkMarkButtonAction?: (id: string) => void;
 }) => {
   const [showOptions, setShowOptions] = useState(false);
+  console.log("checkMarkButtonAction:", checkMarkButtonAction);
+
   return (
     <div
       key={id}
@@ -30,15 +36,29 @@ const Friend = ({
         </div>
       </div>
       {showOptions && (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            deleteFriend(id);
-            setFriends((prev) => prev.filter((item) => item._id !== id));
-          }}
-          className="flex justify-center items-center bg-[#e81123] hover:bg-[#f03948] cursor-pointer"
-        >
-          <IoMdClose />
+        <div className="flex space-x-1">
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              closeButtonAction(id);
+              setFriends((prev) => prev.filter((item) => item._id !== id));
+            }}
+            className="flex justify-center items-center border-1 border-[#e81123] hover:bg-[#f03948] cursor-pointer"
+          >
+            <IoMdClose />
+          </div>
+          {checkMarkButtonAction && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                checkMarkButtonAction(id);
+                setFriends((prev) => prev.filter((item) => item._id !== id));
+              }}
+              className="flex justify-center items-center border-1 border-green-600 hover:bg-green-500 cursor-pointer"
+            >
+              <IoMdCheckmark />
+            </div>
+          )}
         </div>
       )}
     </div>
