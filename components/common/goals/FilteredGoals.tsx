@@ -1,11 +1,16 @@
 "use client";
 import { GoalsType } from "@/api/goals";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Goal from "./Goal";
 import GroupToggleButton from "./GroupToggleButton";
 
-const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
-  const [goalsState, setGoalsState] = useState<GoalsType[]>(goals);
+const FilteredGoals = ({
+  goals,
+  setGoalsState,
+}: {
+  goals: GoalsType[];
+  setGoalsState: Dispatch<SetStateAction<GoalsType[]>>;
+}) => {
   const [completedGoals, setCompletedGoals] = useState<GoalsType[]>([]);
   const [activeGoals, setActiveGoals] = useState<GoalsType[]>([]);
   const [groupOpen, setGroupOpen] = useState({
@@ -14,10 +19,13 @@ const FilteredGoals = ({ goals }: { goals: GoalsType[] }) => {
   });
 
   useEffect(() => {
-    setActiveGoals(goalsState.filter((g) => !g.completed));
-    setCompletedGoals(goalsState.filter((g) => g.completed));
-  }, [goalsState]);
+    setActiveGoals(goals.filter((g) => !g.completed));
+    setCompletedGoals(goals.filter((g) => g.completed));
+  }, [goals]);
 
+  useEffect(() => {
+    console.log("activeGoals:", activeGoals);
+  }, [activeGoals]);
   return (
     <div className="w-full h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
       {activeGoals.length != 0 && (

@@ -4,8 +4,8 @@ import { getAllGoals } from "@/api/goals";
 import FilteredGoals from "./FilteredGoals";
 
 const Goals = async () => {
-  const goals = await getAllGoals();
-  return <FilteredGoals goals={goals} />;
+  // const goals = await getAllGoals();
+  // return <FilteredGoals goals={goals} />;
 };
 
 export default Goals;

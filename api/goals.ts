@@ -36,4 +36,23 @@ const getAllGoals = async () => {
   return goals;
 };
 
-export { getAllGoals };
+const createGoal = async (titleValue: string) => {
+  const token = await checkForTokenFromCookies();
+  const url =
+    process.env.NEXT_PUBLIC_ENV === "DEV"
+      ? process.env.NEXT_PUBLIC_DEV_URL
+      : process.env.NEXT_PUBLIC_PROD_URL;
+
+  await fetch(`${url}/api/v1/goals/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token?.value}`,
+    },
+    body: JSON.stringify({
+      title: titleValue,
+    }),
+  });
+};
+
+export { getAllGoals, createGoal };
