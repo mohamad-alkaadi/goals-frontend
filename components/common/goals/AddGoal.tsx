@@ -6,13 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import AddGoalAddDueDate from "./AddGoalAddDueDate";
 import AddGoalAddPeople from "./AddGoalAddPeople";
 
-const AddGoal = ({
-  setGoalsState,
-}: {
-  setGoalsState: Dispatch<SetStateAction<GoalsType[]>>;
-}) => {
+const AddGoal = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [dueDate, setDueDate] = useState(Date.now());
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -20,10 +17,7 @@ const AddGoal = ({
     e?: React.FormEvent | React.MouseEvent,
     options?: { allowPageReload?: boolean }
   ) => {
-    // Prevent default so we can control when the page actually reloads
     e?.preventDefault();
-
-    // If the input isn't focused, focus it and don't submit yet
     if (inputRef.current != document.activeElement) {
       inputRef.current?.focus();
       return;
@@ -31,19 +25,16 @@ const AddGoal = ({
 
     const title = inputValue.trim();
     if (!title) {
-      // don't submit empty values; keep focus on input
       inputRef.current?.focus();
       return;
     }
 
-    // create the goal then optionally allow the page to reload
     await createGoal(title);
     setInputValue("");
     inputRef.current?.blur();
     setIsFocused(false);
 
     if (options?.allowPageReload) {
-      // programmatically submit the native form to trigger a reload
       formRef.current?.submit();
     }
   };
@@ -56,7 +47,6 @@ const AddGoal = ({
       } text-[#bac8d4] mt-2 rounded-sm flex items-center justify-between`}
     >
       <div className="flex justify-center items-center flex-grow">
-        {/* Clicks on + will create goal then reload if input is focused and non-empty */}
         <button
           type="button"
           onClick={(e) => handleSubmit(e, { allowPageReload: true })}
@@ -75,7 +65,7 @@ const AddGoal = ({
         />
       </div>
       <div className={`flex text-[18px] ${inputValue == "" ? "hidden" : null}`}>
-        <AddGoalAddDueDate />
+        <AddGoalAddDueDate dueDate={dueDate} setDueDate={setDueDate} />
         <AddGoalAddPeople />
       </div>
     </form>
@@ -83,23 +73,3 @@ const AddGoal = ({
 };
 
 export default AddGoal;
-
-// const newGoal = {
-//   title: inputValue,
-//   description: "",
-//   date: new Date(),
-//   dueDateActive: false,
-//   dueDate: new Date(),
-//   overDue: false,
-//   completed: false,
-//   completedAt: new Date(),
-//   favorite: false,
-//   shared: false,
-//   sharedWith: [],
-//   groupName: "ungrouped",
-//   groupId: "ungrouped",
-//   userId: "",
-//   _id: uuidv4(),
-// };
-// setGoalsState((prev) => [...prev, newGoal]);
-// setInputValue("");

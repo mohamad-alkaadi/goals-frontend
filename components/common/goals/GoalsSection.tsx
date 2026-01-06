@@ -16,19 +16,11 @@ const GoalsSection = () => {
     getGoals();
   }, []);
 
-  // useEffect(() => {
-  //   const getGoals = async () => {
-  //     const goals = await getAllGoals();
-  //     setGoalsState(goals);
-  //   };
-  //   getGoals();
-  // }, [goalsState]);
-
   return (
     <div className="p-10 flex flex-col w-full">
       <GoalsSectionHeader />
       <FilteredGoals goals={goalsState} setGoalsState={setGoalsState} />
-      <AddGoal setGoalsState={setGoalsState} />
+      <AddGoal />
     </div>
   );
 };
