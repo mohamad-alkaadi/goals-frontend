@@ -4,7 +4,7 @@ import { TbMail, TbLock, TbLockPassword, TbUser } from "react-icons/tb"
 import { useRouter } from "next/navigation"
 import { signinFunction } from "@/api/signinAuth"
 import AuthErrorMsg from "../AuthErrorMsg"
-import AuthInput from "../AuthInput"
+import AuthInput from "../AuthInput.tsx"
 
 const SigninForm = () => {
   const [errors, setErrors] = useState({
@@ -61,8 +61,8 @@ const SigninForm = () => {
         {Object.values(errors).flatMap((item, index) =>
           item.state
             ? item.message.map((msg, msgIndex) => {
-                return <AuthErrorMsg key={`${index}-${msgIndex}`} msg={msg} />
-              })
+              return <AuthErrorMsg key={`${index}-${msgIndex}`} msg={msg} />
+            })
             : []
         )}
       </>

@@ -29,7 +29,7 @@ const AddGoal = () => {
       return;
     }
 
-    await createGoal(title);
+    await createGoal(title, dueDate);
     setInputValue("");
     inputRef.current?.blur();
     setIsFocused(false);
@@ -42,9 +42,8 @@ const AddGoal = () => {
     <form
       ref={formRef}
       onSubmit={(e) => handleSubmit(e, { allowPageReload: true })}
-      className={`h-[47px] bg-[#2a2a2a] hover:bg-[#373737] ${
-        isFocused ? "bg-[#373737]" : null
-      } text-[#bac8d4] mt-2 rounded-sm flex items-center justify-between`}
+      className={`h-[47px] bg-[#2a2a2a] hover:bg-[#373737] ${isFocused ? "bg-[#373737]" : null
+        } text-[#bac8d4] mt-2 rounded-sm flex items-center justify-between`}
     >
       <div className="flex justify-center items-center flex-grow">
         <button

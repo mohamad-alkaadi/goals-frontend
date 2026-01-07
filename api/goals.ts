@@ -36,7 +36,18 @@ const getAllGoals = async () => {
   return goals;
 };
 
-const createGoal = async (titleValue: string) => {
+function isDateToday(timestamp: number) {
+  const inputDate = new Date(timestamp);
+  const today = new Date();
+
+  return (
+    inputDate.getFullYear() === today.getFullYear() &&
+    inputDate.getMonth() === today.getMonth() &&
+    inputDate.getDate() === today.getDate()
+  );
+}
+
+const createGoal = async (titleValue: string, goalDate: number) => {
   const token = await checkForTokenFromCookies();
   const url =
     process.env.NEXT_PUBLIC_ENV === "DEV"
@@ -51,6 +62,8 @@ const createGoal = async (titleValue: string) => {
     },
     body: JSON.stringify({
       title: titleValue,
+      dueDate: goalDate,
+      dueDateActive: !isDateToday(goalDate),
     }),
   });
 };

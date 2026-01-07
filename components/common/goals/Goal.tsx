@@ -31,13 +31,11 @@ const Goal = ({
   goalDisplay: boolean;
 }) => {
   const [completedGoal, setCompletedGoal] = useState<boolean>(completed);
-
   return (
     <div
       onClick={() => alert("goal clicked")}
-      className={`w-full min-h-[56px] bg-[#2a2a2a] hover:bg-[#373737] rounded-sm flex items-center justify-between px-4 py-2 cursor-pointer ${
-        !goalDisplay && "hidden"
-      }`}
+      className={`w-full min-h-[56px] bg-[#2a2a2a] hover:bg-[#373737] rounded-sm flex items-center justify-between px-4 py-2 cursor-pointer ${!goalDisplay && "hidden"
+        }`}
       key={id}
     >
       <div className="flex space-x-3">
@@ -49,9 +47,8 @@ const Goal = ({
         />
         <div className="flex flex-col cursor-pointer">
           <div
-            className={`text-white text-[15px] ${
-              completedGoal && "line-through"
-            }`}
+            className={`text-white text-[15px] ${completedGoal && "line-through"
+              }`}
           >
             {goal}
           </div>
