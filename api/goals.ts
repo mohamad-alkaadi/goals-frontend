@@ -47,7 +47,7 @@ function isDateToday(timestamp: number) {
   );
 }
 
-const createGoal = async (titleValue: string, goalDate: number) => {
+const createGoal = async (titleValue: string, goalDate: number, shared: boolean, sharedWith: string) => {
   const token = await checkForTokenFromCookies();
   const url =
     process.env.NEXT_PUBLIC_ENV === "DEV"
@@ -64,6 +64,8 @@ const createGoal = async (titleValue: string, goalDate: number) => {
       title: titleValue,
       dueDate: goalDate,
       dueDateActive: !isDateToday(goalDate),
+      shared: shared,
+      sharedWith: sharedWith
     }),
   });
 };

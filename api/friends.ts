@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 export interface FriendsType {
   _id: string;
   name: string;
+  email: string;
 }
 
 export interface FriendsApiResponse {

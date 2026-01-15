@@ -10,6 +10,8 @@ const AddGoal = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [dueDate, setDueDate] = useState(Date.now());
+  const [shared, setShared] = useState<boolean>(false)
+  const [sharedWith, setSharedWith] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -29,7 +31,7 @@ const AddGoal = () => {
       return;
     }
 
-    await createGoal(title, dueDate);
+    await createGoal(title, dueDate, shared, sharedWith);
     setInputValue("");
     inputRef.current?.blur();
     setIsFocused(false);
@@ -65,7 +67,7 @@ const AddGoal = () => {
       </div>
       <div className={`flex text-[18px] ${inputValue == "" ? "hidden" : null}`}>
         <AddGoalAddDueDate dueDate={dueDate} setDueDate={setDueDate} />
-        <AddGoalAddPeople />
+        <AddGoalAddPeople sharedWith={sharedWith} setShared={setShared} setSharedWith={setSharedWith} shared={shared} />
       </div>
     </form>
   );
