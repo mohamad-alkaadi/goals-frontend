@@ -10,7 +10,6 @@ const AddGoalAddPeople = ({ sharedWith, setShared, setSharedWith, shared }: { sh
   return (
     <Tooltip>
       <TooltipTrigger asChild className="hover:bg-[#474747] h-[47px] w-[32px] flex justify-center items-center cursor-pointer">
-        {/* <GoPeople />*/}
         <AddGoalAddPeopleDialog sharedWith={sharedWith} setShared={setShared} setSharedWith={setSharedWith} shared={shared} />
       </TooltipTrigger>
       <TooltipContent className="bg-[#484848] rounded-sm">

@@ -12,6 +12,8 @@ export interface GoalsType {
   groupId: string;
   userId: string;
   shared: boolean;
+  sharedWith: string;
+  sharedWithName: string
   _id: string;
 }
 
@@ -66,7 +68,7 @@ const createGoal = async (titleValue: string, goalDate: number, shared: boolean,
       dueDateActive: !isDateToday(goalDate),
       shared: shared,
       sharedWith: sharedWith
-    }),
+    })
   });
 };
 

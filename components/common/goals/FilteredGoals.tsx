@@ -8,7 +8,7 @@ const FilteredGoals = ({
   goals,
   setGoalsState,
 }: {
-  goals: GoalsType[];
+  goals: GoalsType[],
   setGoalsState: Dispatch<SetStateAction<GoalsType[]>>;
 }) => {
   const [completedGoals, setCompletedGoals] = useState<GoalsType[]>([]);
@@ -23,9 +23,7 @@ const FilteredGoals = ({
     setCompletedGoals(goals.filter((g) => g.completed));
   }, [goals]);
 
-  useEffect(() => {
-    console.log("activeGoals:", activeGoals);
-  }, [activeGoals]);
+
   return (
     <div className="w-full h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
       {activeGoals.length != 0 && (
@@ -50,6 +48,7 @@ const FilteredGoals = ({
             overdue={item.overDue}
             dueDate={item.dueDate}
             shared={item.shared}
+            sharedWithName={item.sharedWithName}
             id={item._id}
             completed={item.completed}
             key={item._id}
@@ -80,6 +79,7 @@ const FilteredGoals = ({
           overdue={item.overDue}
           dueDate={item.dueDate}
           shared={item.shared}
+          sharedWithName={item.sharedWithName}
           id={item._id}
           completed={item.completed}
           key={item._id}

@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { createGoal, GoalsType } from "@/api/goals";
 import { v4 as uuidv4 } from "uuid";

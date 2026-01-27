@@ -1,10 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import GoalOptions from "./GoalOptions";
 import GoalCheck from "./GoalCheck";
 import GoalDate from "./GoalDate";
 import { GoalsType } from "@/api/goals";
-
+import { FriendsApiResponse, FriendsType, getAllFriends } from "@/api/friends";
+import { GoDotFill } from "react-icons/go";
 const Goal = ({
   goal,
   groupName,
@@ -13,6 +14,7 @@ const Goal = ({
   overdue,
   dueDate,
   shared,
+  sharedWithName,
   id,
   completed,
   setGoalsState,
@@ -25,6 +27,7 @@ const Goal = ({
   overdue: boolean;
   dueDate: Date;
   shared: boolean;
+  sharedWithName: string;
   id: string;
   completed: boolean;
   setGoalsState: Dispatch<SetStateAction<GoalsType[]>>;
@@ -56,6 +59,7 @@ const Goal = ({
             <div className={`text-[13px] `}>
               {groupName == "ungrouped" ? null : groupName}
             </div>
+            {groupName != "ungrouped" ? <GoDotFill className="text-[10px] mt-[2px]" /> : null}
             <GoalDate
               dueDateActive={dueDateActive}
               overdue={overdue}
@@ -65,7 +69,7 @@ const Goal = ({
           </div>
         </div>
       </div>
-      <GoalOptions favorite={favorite} id={id} shared={shared} />
+      <GoalOptions favorite={favorite} id={id} shared={shared} sharedWithName={sharedWithName} />
     </div>
   );
 };
