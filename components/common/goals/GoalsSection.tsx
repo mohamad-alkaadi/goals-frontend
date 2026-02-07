@@ -5,12 +5,12 @@ import GoalsSectionHeader from "./GoalsSectionHeader";
 import { getAllGoals, GoalsType } from "@/api/goals";
 import FilteredGoals from "./FilteredGoals";
 
-const GoalsSection = () => {
+const GoalsSection = ({ title, groupName }: { title: string, groupName: string }) => {
   const [goalsState, setGoalsState] = useState<GoalsType[]>([]);
 
   useEffect(() => {
     const getGoals = async () => {
-      const goals = await getAllGoals();
+      const goals = await getAllGoals(groupName);
       setGoalsState(goals);
     };
     getGoals();
@@ -18,7 +18,7 @@ const GoalsSection = () => {
 
   return (
     <div className="p-10 flex flex-col w-full">
-      <GoalsSectionHeader />
+      <GoalsSectionHeader title={title} />
       <FilteredGoals goals={goalsState} setGoalsState={setGoalsState} />
       <AddGoal />
     </div>

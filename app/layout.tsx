@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
+import Sidebar from "@/components/common/sidebar/Sidebar"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="flex bg-[#1c1c1c]">
+        <Sidebar />
+        {children}
+      </body>
     </html>
   )
 }

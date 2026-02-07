@@ -17,7 +17,7 @@ export interface GoalsType {
   _id: string;
 }
 
-const getAllGoals = async () => {
+const getAllGoals = async (groupName: string) => {
   const token = await checkForTokenFromCookies();
 
   const url =
@@ -25,7 +25,7 @@ const getAllGoals = async () => {
       ? process.env.NEXT_PUBLIC_DEV_URL
       : process.env.NEXT_PUBLIC_PROD_URL;
 
-  const goals = await fetch(`${url}/api/v1/goals/`, {
+  const goals = await fetch(`${url}/api/v1/goals?group=${groupName}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const createGoal = async (titleValue: string, goalDate: number, shared: boolean,
       dueDate: goalDate,
       dueDateActive: !isDateToday(goalDate),
       shared: shared,
-      sharedWith: sharedWith
+      sharedWith: sharedWith,
     })
   });
 };

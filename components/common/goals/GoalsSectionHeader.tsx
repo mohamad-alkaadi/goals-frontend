@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { BsThreeDots } from "react-icons/bs";
 
-const GoalsSectionHeader = () => {
+const GoalsSectionHeader = ({ title }: { title: string }) => {
   const date = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
@@ -19,12 +19,12 @@ const GoalsSectionHeader = () => {
   return (
     <div className="w-full flex justify-between items-center">
       <div>
-        <div className="text-[30px] font-[600] text-[#8795a0]">My Day</div>
+        <div className="text-[30px] font-[600] text-[#8795a0] capitalize">{title}</div>
         <div className="text-[15px] font-[400] text-[#8795a0]">{date}</div>
       </div>
       <div className="flex space-x-1 text-white">
         <FriendsSheet />
-        <SuggestionsSheet />
+        {/*<SuggestionsSheet />*/}
         <DropdownMenu>
           <DropdownMenuTrigger className="hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
             <BsThreeDots />

@@ -11,9 +11,6 @@ export default async function Home() {
   if (!token) redirect("/auth/signin");
 
   return (
-    <div className="flex bg-[#1c1c1c]">
-      <Sidebar />
-      <GoalsSection />
-    </div>
+    <GoalsSection title={"my day"} groupName={'ungrouped'} />
   );
 }
