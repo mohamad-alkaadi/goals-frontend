@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+import { createGroup } from "../../../api/groups"
 
 const SidebarAddGroup = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,8 +37,7 @@ const SidebarAddGroup = () => {
       inputRef.current?.focus();
       return;
     }
-
-    // await createGoal(title, dueDate, shared, sharedWith);
+    await createGroup(title)
     setInputValue("");
     inputRef.current?.blur();
     setIsFocused(false);
@@ -47,7 +47,9 @@ const SidebarAddGroup = () => {
     }
   };
   return (
-    <div className="flex items-center text-white">
+    <form ref={formRef}
+      onSubmit={(e) => handleSubmit(e, { allowPageReload: true })}
+      className="flex items-center text-white">
       <div className="flex items-center space-x-2 w-[85%] hover:bg-[#333333] pl-4 py-2 cursor-pointer">
         <button
           type="button"
@@ -62,6 +64,7 @@ const SidebarAddGroup = () => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           value={inputValue}
+          maxLength={20}
           onChange={(e) => setInputValue(e.target.value)}
         />
 
@@ -83,7 +86,7 @@ const SidebarAddGroup = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div >
+    </form >
   )
 }
 

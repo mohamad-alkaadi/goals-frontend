@@ -59,7 +59,7 @@ const Goal = ({
             <div className={`text-[13px] `}>
               {groupName == "ungrouped" ? null : groupName}
             </div>
-            {groupName != "ungrouped" ? <GoDotFill className="text-[10px] mt-[2px]" /> : null}
+            {groupName == "ungrouped" || !dueDateActive ? null : <GoDotFill className="text-[10px] mt-[2px]" />}
             <GoalDate
               dueDateActive={dueDateActive}
               overdue={overdue}

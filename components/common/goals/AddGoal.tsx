@@ -5,6 +5,7 @@ import { createGoal, GoalsType } from "@/api/goals";
 import { v4 as uuidv4 } from "uuid";
 import AddGoalAddDueDate from "./AddGoalAddDueDate";
 import AddGoalAddPeople from "./AddGoalAddPeople";
+import { usePathname } from "next/navigation";
 
 const AddGoal = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -14,7 +15,8 @@ const AddGoal = () => {
   const [sharedWith, setSharedWith] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
-
+  const pathname = usePathname().replaceAll("/", "")
+  const groupName = pathname == "" ? "ungrouped" : pathname
   const handleSubmit = async (
     e?: React.FormEvent | React.MouseEvent,
     options?: { allowPageReload?: boolean }
@@ -31,7 +33,7 @@ const AddGoal = () => {
       return;
     }
 
-    await createGoal(title, dueDate, shared, sharedWith);
+    await createGoal(title, dueDate, shared, sharedWith, groupName);
     setInputValue("");
     inputRef.current?.blur();
     setIsFocused(false);
