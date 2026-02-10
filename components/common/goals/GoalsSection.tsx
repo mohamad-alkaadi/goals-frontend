@@ -21,6 +21,7 @@ const GoalsSection = ({ title, groupName }: { title: string, groupName: string }
     getGoals();
   }, []);
 
+
   useEffect(() => {
     if (sortType === "none" || goalsState.length === 0) return;
 

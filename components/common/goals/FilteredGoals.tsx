@@ -19,6 +19,7 @@ const FilteredGoals = ({
   });
 
   useEffect(() => {
+    if (!goals) return;
     setActiveGoals(goals.filter((g) => !g.completed));
     setCompletedGoals(goals.filter((g) => g.completed));
   }, [goals]);
