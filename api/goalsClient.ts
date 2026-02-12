@@ -44,7 +44,7 @@ const changeGoalCompletion = async (
     process.env.NEXT_PUBLIC_ENV === "DEV"
       ? process.env.NEXT_PUBLIC_DEV_URL
       : process.env.NEXT_PUBLIC_PROD_URL;
-  const isCompleated = !completedGoal
+  const isCompleted = !completedGoal
   await fetch(`${url}/api/v1/goals/${id}`, {
     method: "PATCH",
     headers: {
@@ -54,7 +54,7 @@ const changeGoalCompletion = async (
     body: JSON.stringify({
       completed: !completedGoal,
       completedAt: Date.now(),
-      ...(isCompleated && { overDue: false })
+      ...(isCompleted && { overDue: false })
     }),
   });
   setCompletedGoal(!completedGoal);
