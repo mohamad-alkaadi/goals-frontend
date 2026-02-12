@@ -15,8 +15,8 @@ const AddGoal = () => {
   const [sharedWith, setSharedWith] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const pathname = usePathname().replaceAll("/", "")
-  const groupName = pathname == "" ? "ungrouped" : pathname
+  const pathname = usePathname().split("/").at(-1) || "home"
+  const groupName = pathname == "home" ? "ungrouped" : pathname
   const handleSubmit = async (
     e?: React.FormEvent | React.MouseEvent,
     options?: { allowPageReload?: boolean }

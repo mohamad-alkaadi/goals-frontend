@@ -4,7 +4,7 @@ import { TbMail, TbLock, TbLockPassword, TbUser } from "react-icons/tb"
 import { useRouter } from "next/navigation"
 import { signinFunction } from "@/api/signinAuth"
 import AuthErrorMsg from "../AuthErrorMsg"
-import AuthInput from "../AuthInput.tsx"
+import AuthInput from "../AuthInput"
 
 const SigninForm = () => {
   const [errors, setErrors] = useState({
@@ -30,7 +30,7 @@ const SigninForm = () => {
       onSubmit={(e) => {
         signinFunction(e, errors, setErrors).then((result) => {
           if (result) {
-            router.push("/")
+            router.push("/home/")
           }
         })
       }}

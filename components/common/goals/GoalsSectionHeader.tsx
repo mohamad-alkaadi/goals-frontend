@@ -41,7 +41,7 @@ const GoalsSectionHeader = ({ title, sortActive, setSortActive, sortDescending, 
         <FriendsSheet />
         {/*<SuggestionsSheet />*/}
         <DropdownMenu>
-          <DropdownMenuTrigger className="hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">
+          <DropdownMenuTrigger className="hover:bg-[#373737] outline-0 rounded-sm w-[28px] h-[28px] flex justify-center items-center">
             <BsThreeDots />
           </DropdownMenuTrigger>
           <DropdownMenuContent

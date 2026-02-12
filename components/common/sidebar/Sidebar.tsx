@@ -15,12 +15,12 @@ const Sidebar = async () => {
         <SidebarUser />
         <SideBarSeparator />
         <div className="h-[calc(100vh-69px-68px)] overflow-auto">
-          <SidebarConstantGroupButton title={""} slug={""} />
-          <SidebarConstantGroupButton title={"overdue"} slug={"overdue"} />
-          <SidebarConstantGroupButton title={"completed"} slug={"completed"} />
-          <SidebarConstantGroupButton title={"shared"} slug={"shared"} />
+          <SidebarConstantGroupButton title={"my day"} slug={"/home"} />
+          <SidebarConstantGroupButton title={"overdue"} slug={"/home/overdue"} />
+          <SidebarConstantGroupButton title={"completed"} slug={"/home/completed"} />
+          <SidebarConstantGroupButton title={"shared"} slug={"/home/shared"} />
           <SideBarSeparator />
-          {groups.map((item: GroupsType) => (<div key={item._id}><SidebarConstantGroupButton title={item.name} slug={item.slug} /></div>))}
+          {groups.map((item: GroupsType) => (<div key={item._id}><SidebarConstantGroupButton title={item.name} slug={`/home/${item.slug}`} /></div>))}
           {/*<SidebarAddedGroupButton title={"study"} nOfGoals={3} />*/}
         </div>
       </div>
