@@ -5,6 +5,27 @@ import Image from "next/image";
 import { IoIosAdd } from "react-icons/io";
 import Sidebar from "@/components/common/sidebar/Sidebar";
 import GoalsSection from "@/components/common/goals/GoalsSection";
+import type { Metadata, ResolvingMetadata } from "next"
+
+type Props = {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata(
+  { params }: Props,
+): Promise<Metadata> {
+  const { slug } = await params
+
+  const title = slug
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+
+  return {
+    title: title,
+    description: `Viewing the ${title} page`,
+  }
+}
 
 export default async function page({ params }: { params: Promise<{ slug: string }> }) {
   const token = await checkForTokenFromCookies();

@@ -35,6 +35,7 @@ const getAllGoals = async (groupName: string) => {
     .then((res) => res.json())
     .then((data) => data.data as GoalsType[]);
 
+  console.log("goals:", goals)
   return goals;
 };
 

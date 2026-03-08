@@ -6,6 +6,15 @@ import { IoIosAdd } from "react-icons/io";
 import Sidebar from "@/components/common/sidebar/Sidebar";
 import GoalsSection from "@/components/common/goals/GoalsSection";
 
+export async function generateMetadata(
+) {
+  return {
+    title: "Shared",
+    description: `Viewing the shared page`,
+  }
+}
+
+
 export default async function page() {
   const token = await checkForTokenFromCookies();
   if (!token) redirect("/auth/signin");

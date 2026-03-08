@@ -3,6 +3,7 @@ import { GoalsType } from "@/api/goals";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Goal from "./Goal";
 import GroupToggleButton from "./GroupToggleButton";
+import GoalsSheet from "../sheets/GoalsSheet";
 
 const FilteredGoals = ({
   goals,
@@ -40,23 +41,24 @@ const FilteredGoals = ({
         />
       )}
       {activeGoals.map((item) => (
-        <div key={item._id}>
-          <Goal
-            goal={item.title}
-            groupName={item.groupName}
-            favorite={item.favorite}
-            dueDateActive={item.dueDateActive}
-            overdue={item.overDue}
-            dueDate={item.dueDate}
-            shared={item.shared}
-            sharedWithName={item.sharedWithName}
-            id={item._id}
-            completed={item.completed}
-            key={item._id}
-            setGoalsState={setGoalsState}
-            goalDisplay={groupOpen.active}
-          />
-        </div>
+        <GoalsSheet key={item._id} actionButton={
+          <div>
+            <Goal
+              goal={item.title}
+              groupName={item.groupName}
+              favorite={item.favorite}
+              dueDateActive={item.dueDateActive}
+              overdue={item.overDue}
+              dueDate={item.dueDate}
+              shared={item.shared}
+              sharedWithName={item.sharedWithName}
+              id={item._id}
+              completed={item.completed}
+              key={item._id}
+              setGoalsState={setGoalsState}
+              goalDisplay={groupOpen.active}
+            />
+          </div>} goalItem={item} />
       ))}
       {completedGoals.length != 0 && (
         <GroupToggleButton
@@ -72,21 +74,22 @@ const FilteredGoals = ({
       )}
 
       {completedGoals.map((item) => (
-        <Goal
-          goal={item.title}
-          groupName={item.groupName}
-          favorite={item.favorite}
-          dueDateActive={item.dueDateActive}
-          overdue={item.overDue}
-          dueDate={item.dueDate}
-          shared={item.shared}
-          sharedWithName={item.sharedWithName}
-          id={item._id}
-          completed={item.completed}
-          key={item._id}
-          setGoalsState={setGoalsState}
-          goalDisplay={groupOpen.completed}
-        />
+        <GoalsSheet key={item._id} actionButton={
+          <Goal
+            goal={item.title}
+            groupName={item.groupName}
+            favorite={item.favorite}
+            dueDateActive={item.dueDateActive}
+            overdue={item.overDue}
+            dueDate={item.dueDate}
+            shared={item.shared}
+            sharedWithName={item.sharedWithName}
+            id={item._id}
+            completed={item.completed}
+            key={item._id}
+            setGoalsState={setGoalsState}
+            goalDisplay={groupOpen.completed}
+          />} goalItem={item} />
       ))}
     </div>
   );
