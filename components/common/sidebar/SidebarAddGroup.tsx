@@ -77,10 +77,10 @@ const SidebarAddGroup = () => {
           side="right"
           className="bg-[#212121] text-white border-0 mt-1 rounded-sm"
         >
-          <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+          {/*<DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
             Profile
           </DropdownMenuItem>
-          <DropdownMenuSeparator className="bg-[#343434]" />
+          <DropdownMenuSeparator className="bg-[#343434]" />*/}
           <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
             Logout
           </DropdownMenuItem>

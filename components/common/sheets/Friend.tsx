@@ -17,7 +17,6 @@ const Friend = ({
   checkMarkButtonAction?: (id: string) => void;
 }) => {
   const [showOptions, setShowOptions] = useState(false);
-  console.log("checkMarkButtonAction:", checkMarkButtonAction);
 
   return (
     <div
