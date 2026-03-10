@@ -20,7 +20,7 @@ const GoalOptions = ({
   const [favoriteState, setFavoriteState] = useState<boolean>(favorite);
 
   return (
-    <div className="flex justify-center items-center space-x-2">
+    <div className="flex justify-center items-center space-x-2 ">
       {shared ? (
         <Tooltip>
           <TooltipTrigger asChild>
