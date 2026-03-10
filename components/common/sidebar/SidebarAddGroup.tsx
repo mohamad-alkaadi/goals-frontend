@@ -16,12 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { createGroup } from "../../../api/groups"
+import { useRouter } from "next/navigation"
+import { deleteTokenCookieClient } from "@/utils/tokenUtilsClient"
+import { deleteTokenCookieServer } from "@/utils/tokenUtils"
 
 const SidebarAddGroup = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const router = useRouter()
   const handleSubmit = async (
     e?: React.FormEvent | React.MouseEvent,
     options?: { allowPageReload?: boolean }
@@ -46,6 +50,13 @@ const SidebarAddGroup = () => {
       formRef.current?.submit();
     }
   };
+
+  const logout = () => {
+    deleteTokenCookieClient()
+    deleteTokenCookieServer()
+    router.push("/")
+  }
+
   return (
     <form ref={formRef}
       onSubmit={(e) => handleSubmit(e, { allowPageReload: true })}
@@ -81,7 +92,7 @@ const SidebarAddGroup = () => {
             Profile
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-[#343434]" />*/}
-          <DropdownMenuItem className="hover:bg-[#333333] rounded-sm cursor-pointer">
+          <DropdownMenuItem onClick={() => logout()} className="hover:bg-[#333333] rounded-sm cursor-pointer">
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>

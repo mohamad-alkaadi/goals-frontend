@@ -10,7 +10,6 @@ export default async function Home() {
   const token = await checkForTokenFromCookies();
   if (!token) redirect("/auth/signin");
   if (token) redirect("/home");
-
   return (
     <div></div>
   );

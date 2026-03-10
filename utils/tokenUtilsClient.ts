@@ -1,9 +1,13 @@
 "use client";
-import { getCookie } from "cookies-next";
+import { getCookie, deleteCookie } from "cookies-next";
 
 const getTokenCookieClient = () => {
   const token = getCookie("token");
   return token;
 };
 
-export { getTokenCookieClient };
+const deleteTokenCookieClient = () => {
+  deleteCookie("token");
+}
+
+export { getTokenCookieClient, deleteTokenCookieClient };

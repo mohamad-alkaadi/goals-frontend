@@ -2,7 +2,7 @@
 import { jwtDecode } from "jwt-decode"
 import { cookies } from "next/headers"
 
-const decodeJWT = (token: string) => {
+const decodeJWT = async (token: string) => {
   const decodedToken = jwtDecode(token)
   return decodedToken
 }
@@ -13,4 +13,10 @@ const checkForTokenFromCookies = async () => {
   return token
 }
 
-export { decodeJWT, checkForTokenFromCookies }
+const deleteTokenCookieServer = async () => {
+  const cookieStore = await cookies()
+  cookieStore.delete("token")
+}
+
+
+export { decodeJWT, checkForTokenFromCookies, deleteTokenCookieServer }
