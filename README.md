@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Goals App - Frontend
+
+A responsive and intuitive web application designed to help users manage their daily tasks, group their goals, and share objectives with friends.
+
+## Features
+
+- **Task Management**: Create, complete, and track tasks (goals) effortlessly.
+- **Smart Grouping**: Organize your life with constant groups like "My Day", "Overdue", "Completed", and "Shared", or create custom groups tailored to your workflow.
+- **Social Sharing**: Add friends and collaborate on shared tasks.
+- **Responsive Design**: A seamless experience across desktop and mobile devices, featuring a sliding drawer menu on smaller screens.
+- **Authentication**: Secure sign-in and sign-up flows.
+- **Customization**: Mark tasks as favorites and sort them by importance, due date, alphabetically, or creation date.
+
+## Tech Stack
+
+This project is built using modern web development tools:
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **UI Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with NativeWind considerations.
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
+- **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI primitives for dialogs, dropdowns, tooltips, sheets, etc.)
+- **Icons**: `react-icons` and `lucide-react`
+- **Authentication/Session**: `cookies-next` and `jwt-decode`
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ensure you have [Node.js](https://nodejs.org/) installed (v20 or higher is recommended).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository and navigate into the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   cd goals-frontend
+   ```
 
-## Learn More
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+### Deployment Link
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://goals-frontend-nu.vercel.app/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `npm run dev`: Starts the application in development mode.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Starts the application in production mode.
+- `npm run lint`: Runs the Next.js linter.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/app`: Next.js App Router pages and layouts.
+- `/api`: Client and server API utilities for interacting with the backend.
+- `/components`: Reusable React components.
+  - `/auth`: Forms and inputs for authentication.
+  - `/common`: Core application components (goals, sheets, sidebar).
+  - `/ui`: Accessible, unstyled UI primitives from shadcn/ui.
+- `/lib`: Utility functions, hooks, and Redux store configuration.
+- `/utils`: Helper functions for tokens, strings, and validation.
