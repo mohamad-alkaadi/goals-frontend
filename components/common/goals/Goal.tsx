@@ -36,7 +36,7 @@ const Goal = ({
   const [completedGoal, setCompletedGoal] = useState<boolean>(completed);
   return (
     <div
-      className={`w-full min-h-[56px] bg-[#2a2a2a] hover:bg-[#373737] rounded-sm flex items-center justify-between px-4 py-2 cursor-pointer ${!goalDisplay && "hidden"
+      className={`min-h-[56px] bg-[#2a2a2a] hover:bg-[#373737] rounded-sm flex items-center justify-between px-4 py-2 cursor-pointer ${!goalDisplay && "hidden"
         }`}
       key={id}
     >

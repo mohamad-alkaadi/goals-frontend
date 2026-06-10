@@ -15,7 +15,7 @@ const GoalCheck = ({
   setGoalsState: Dispatch<SetStateAction<GoalsType[]>>;
 }) => {
   return (
-    <div className="w-[18px] h-[18px] border-[2px] rounded-full border-[#cbcbcb] flex justify-center items-center text group mt-[2px]">
+    <div className="w-[18px] h-[18px] flex-shrink-0 border-[2px] rounded-full border-[#cbcbcb] flex justify-center items-center text group mt-[2px]">
       <FaCheck
         onClick={(event: React.MouseEvent) => {
           event.stopPropagation();
@@ -26,9 +26,8 @@ const GoalCheck = ({
             )
           );
         }}
-        className={`text-[10px] text-[#cbcbcb] group-hover:block ${
-          completedGoal ? "block" : "hidden"
-        }`}
+        className={`text-[10px] text-[#cbcbcb] group-hover:block ${completedGoal ? "block" : "hidden"
+          }`}
       />
     </div>
   );

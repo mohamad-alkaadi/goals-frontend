@@ -4,7 +4,7 @@ import Link from "next/link"
 const page = () => {
   return (
     <div className="w-full h-screen bg-[#0b0b0b] flex justify-center items-center">
-      <div className="bg-[#181818] rounded-md shadow-2xl flex flex-col text-white justify-center items-center w-fit py-6 px-3">
+      <div className="bg-[#181818] rounded-md shadow-2xl flex flex-col text-white justify-center items-center w-fit py-6 px-3 max-[440px]:bg-[#0b0b0b] max-[440px]:px-0 max-[440px]:w-full">
         <h1 className="text-[50px] font-[500] mb-2 great-vibes-regular">
           Goals
         </h1>

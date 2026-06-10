@@ -27,7 +27,7 @@ const FilteredGoals = ({
 
 
   return (
-    <div className="w-full h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
+    <div className="h-[20px] flex-grow overflow-auto pr-1 mt-4 flex flex-col space-y-1">
       {activeGoals.length != 0 && (
         <GroupToggleButton
           length={activeGoals.length}

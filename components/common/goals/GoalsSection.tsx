@@ -49,7 +49,7 @@ const GoalsSection = ({ title, groupName }: { title: string, groupName: string }
   }, [sortActive, sortDescending, sortType]);
   const checkAddGoalActive = !["shared", "overdue", "completed"].includes(groupName)
   return (
-    <div className="p-10 flex flex-col w-full">
+    <div className="p-10 flex flex-col flex-grow">
       <GoalsSectionHeader title={title} sortActive={sortActive} setSortActive={setSortActive} sortDescending={sortDescending} setSortDescending={setSortDescending} sortType={sortType} setSortType={setSortType} />
       <FilteredGoals goals={goalsState} setGoalsState={setGoalsState} />
       {checkAddGoalActive && <AddGoal />}
