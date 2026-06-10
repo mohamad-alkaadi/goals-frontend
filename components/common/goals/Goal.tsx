@@ -40,21 +40,21 @@ const Goal = ({
         }`}
       key={id}
     >
-      <div className="flex space-x-3">
+      <div className="flex space-x-3 flex-1 min-w-0 mr-4">
         <GoalCheck
           id={id}
           completedGoal={completedGoal}
           setCompletedGoal={setCompletedGoal}
           setGoalsState={setGoalsState}
         />
-        <div className="flex flex-col items-start cursor-pointer">
+        <div className="flex flex-col items-start cursor-pointer flex-1 min-w-0">
           <div
-            className={`text-white text-[15px] ${completedGoal && "line-through"
+            className={`text-white text-[15px] break-words w-full ${completedGoal && "line-through"
               }`}
           >
             {goal}
           </div>
-          <div className="text-[#cbcbcb] flex items-center space-x-2 ml-[1px]">
+          <div className="text-[#cbcbcb] flex flex-wrap items-center gap-x-2 ml-[1px]">
             {groupName == "ungrouped" ? null : <div className={`text-[13px] `}>
               {groupName}
             </div>}

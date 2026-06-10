@@ -12,7 +12,7 @@ const AuthInput = ({
   inputPlaceholder: string
 }) => {
   return (
-    <div className="w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md max-[440px]:w-[95%]">
+    <div className="w-full max-w-[360px] flex justify-center h-[50px] items-center bg-black rounded-md">
       <Icon className="text-[#808080] text-[26px] mx-1 mt-[1.5px]" />
       <input
         type={inputType}

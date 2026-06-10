@@ -53,7 +53,7 @@ const SigninForm = () => {
 
       <button
         type="submit"
-        className="cursor-pointer w-[360px] text-[15px] bg-[#035fb6] hover:bg-[#0076da] h-[50px] rounded-md max-[440px]:w-[95%]"
+        className="cursor-pointer w-full max-w-[360px] text-[15px] bg-[#035fb6] hover:bg-[#0076da] h-[50px] rounded-md"
       >
         Sign In
       </button>

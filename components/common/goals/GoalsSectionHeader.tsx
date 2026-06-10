@@ -29,10 +29,10 @@ const GoalsSectionHeader = ({ title, sortActive, setSortActive, sortDescending, 
   }
 
   return (
-    <div className="w-full flex justify-between items-center">
+    <div className="w-full flex justify-between items-center pl-10 md:pl-0">
       <div>
-        <div className="text-[30px] font-[600] text-[#8795a0] capitalize">{title}</div>
-        <div className="text-[15px] font-[400] text-[#8795a0]">{date}</div>
+        <div className="text-[24px] md:text-[30px] font-[600] text-[#8795a0] capitalize">{title}</div>
+        <div className="text-[13px] md:text-[15px] font-[400] text-[#8795a0]">{date}</div>
       </div>
       <div className="flex space-x-1 text-white">
         {sortType != "none" && <div onClick={() => setSortDescending((prev) => (!prev))} className="bg-[#303030] hover:bg-[#373737] rounded-sm w-[28px] h-[28px] flex justify-center items-center">

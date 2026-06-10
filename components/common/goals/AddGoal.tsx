@@ -46,7 +46,7 @@ const AddGoal = () => {
     <form
       ref={formRef}
       onSubmit={(e) => handleSubmit(e, { allowPageReload: true })}
-      className={`h-[47px] bg-[#2a2a2a] hover:bg-[#373737] ${isFocused ? "bg-[#373737]" : null
+      className={`min-h-[47px] shrink-0 bg-[#2a2a2a] hover:bg-[#373737] ${isFocused ? "bg-[#373737]" : null
         } text-[#bac8d4] mt-2 rounded-sm flex items-center justify-between`}
     >
       <div className="flex justify-center items-center flex-grow">
